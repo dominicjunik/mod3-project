@@ -17,6 +17,7 @@ connectDB()
 
 // When the routes are set up we can import them here
 const userRoutes = require('./routes/userRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 // middleware for the json
 app.use(express.json())
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {res.send('Server says Hi!')})
 
 // after the routes are imported we can set up their directions here
 app.use('/api/users', userRoutes)
+app.use('/auth', authRoutes)
 
 
 

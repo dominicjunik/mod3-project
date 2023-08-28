@@ -12,6 +12,7 @@ router.get('/', userController.index)
 router.get('/:id', userController.show)
 
 // AUTH ROUTES these will be moved later
+
 // create route aka register aka new POST =>
 router.post('/', userController.create)
 // delete route DELETE =>
