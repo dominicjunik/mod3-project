@@ -24,7 +24,12 @@ const postSchema = new Schema({
     },
     // not sure the best way to store likes and dislikes but i will start with just numbers
     likes: { type: Number, default: 0 },
-    dislikes: {type: Number, default: 0}
+    dislikes: {type: Number, default: 0},
+    // the 
+    solvedBy: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'solvedBy'
+    }]
 
 }, { timestamps: true })
 
