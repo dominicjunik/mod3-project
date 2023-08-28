@@ -1,0 +1,56 @@
+const User = require('../models/userModel')
+
+//set these up as arrow functions so the names can be protected classes like NEW
+
+// index GET => display all users that exist
+module.exports.index = async (req, res) => {
+    console.log('GET => /api/users/')
+    try {        
+        const users = await User.find()
+        console.log('Found users', users)
+        res.json(users)
+    } catch(err) {
+        console.log(error.message)
+        res.json({error: error.message})
+    }
+}
+
+// create POST => creates a new user
+module.exports.create = async (req, res) => {
+    console.log('POST => /api/users/')
+    console.log(req.body)
+    try {
+        const user = await User.create(req.body)
+        res.json(user)
+    } catch(err) {
+        console.log(error.message)
+        res.json({error: error.message})
+    }
+}
+
+// update PUT => this route updates the user information
+module.exports.update = async (req, res) => {
+    console.log('PUT => /api/users/:id')
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        console.log('Found user', user)
+        res.json(updatedUser)
+    } catch(err) {
+        console.log(error.message)
+        res.json({error: error.message})
+    }
+}
+
+// show GET => this route will display the profile information and allow it to be editted 
+module.exports.show = async (req, res) => {
+    console.log('GET => /api/users/:id')
+    try {
+        const user = await User.findById(req.params.id)
+        console.log('Found user', user)
+        res.json(user)
+    } catch(err) {
+        console.log(error.message)
+        res.json({error: error.message})
+    }
+}
+
