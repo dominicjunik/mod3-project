@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
         const users = await User.find()
         console.log('Found users', users)
         res.json(users)
-    } catch(err) {
+    } catch(error) {
         console.log(error.message)
         res.json({error: error.message})
     }
@@ -22,7 +22,7 @@ module.exports.create = async (req, res) => {
     try {
         const user = await User.create(req.body)
         res.json(user)
-    } catch(err) {
+    } catch(error) {
         console.log(error.message)
         res.json({error: error.message})
     }
@@ -33,9 +33,9 @@ module.exports.update = async (req, res) => {
     console.log('PUT => /api/users/:id')
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        console.log('Found user', user)
+        console.log('Found user', updatedUser)
         res.json(updatedUser)
-    } catch(err) {
+    } catch(error) {
         console.log(error.message)
         res.json({error: error.message})
     }
@@ -48,7 +48,7 @@ module.exports.show = async (req, res) => {
         const user = await User.findById(req.params.id)
         console.log('Found user', user)
         res.json(user)
-    } catch(err) {
+    } catch(error) {
         console.log(error.message)
         res.json({error: error.message})
     }
