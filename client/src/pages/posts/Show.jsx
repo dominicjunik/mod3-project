@@ -1,4 +1,4 @@
-export default function Show(){
+export default function Show({username}){
     return(
         <div>
             Show

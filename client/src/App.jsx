@@ -57,13 +57,13 @@ export default function App() {
       <Routes>
         {/* these routes are open to anyone */}
         <Route path='/' element={<Navigate to='/posts' />} />
-        <Route path='/posts' element={<Index user={loggedInUser} />} />
-        <Route path='/posts/:id' element={<Show user={loggedInUser} />} />
+        <Route path='/posts' element={<Index username={loggedInUser} />} />
+        <Route path='/posts/:id' element={<Show username={loggedInUser} />} />
         {loggedInUser ?
           //these routes require you to be logged in 
           <>
-            <Route path='/posts/new' element={<New user={loggedInUser}/>} />
-            <Route path='/posts/:id/edit' element={<Edit user={loggedInUser} />} />
+            <Route path='/posts/new' element={<New username={loggedInUser}/>} />
+            <Route path='/posts/:id/edit' element={<Edit username={loggedInUser} />} />
             {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
             {loaded && <Route path='*' element={<Navigate to='/posts' />} />}
           </> 

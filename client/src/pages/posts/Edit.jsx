@@ -1,4 +1,4 @@
-export default function Edit(){
+export default function Edit({username}){
     return(
         <div>
             Edit
