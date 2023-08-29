@@ -4,8 +4,8 @@ export default function Navbar({ username, setUser }) {
   // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
 
   return (
-    <div className="flex w-screen">
-      <ul className="bg-slate-700 w-screen justify-between">
+    <nav className="w-screen bg-slate-700">
+      <ul className="flex flex-row justify-evenly p-1">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -22,6 +22,6 @@ export default function Navbar({ username, setUser }) {
           </>
         )}
       </ul>
-    </div>
+    </nav>
   );
 }

@@ -46,7 +46,7 @@ export default function App() {
   let loggedInUser = user.username
 
   return (
-    <div className="bg-slate-600 h-screen w-screen">
+    <div className="flex flex-col items-center bg-slate-600 h-screen">
       <Navbar username={loggedInUser} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Navigate />} />
