@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 // we get a token back from logging in, we save this in local storage,
 // this function checks if that token is valid and then sends them to the next part of the route
 
-module.exports.authorize = (req, res, next) => {
+function authorize (req, res, next) {
     try {
         console.log("auth middleware starting...");
         // step 1: see if there is a token sent in the header
@@ -33,3 +33,8 @@ module.exports.authorize = (req, res, next) => {
         res.status(403).json({ error: error.message });
     }
 };
+
+
+module.exports = {
+    authorize
+}
