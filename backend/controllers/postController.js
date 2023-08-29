@@ -1,0 +1,68 @@
+// import the models for the posts
+const Posts = require('../models/postModel')
+// might need the user model as well
+const User = require('../models/userModel')
+
+// seed route 
+// index GET => display all posts
+module.exports.index = async (req, res) => {
+    try {
+        // get all the posts and sort by likes
+        const posts = await Posts.find().sort({ likes: 1 })
+        // send them out
+        res.json(posts)
+    } catch(error) {
+        console.log(error.message)
+        res.json({ error: error.message })
+    }
+}
+// delete DELETE => delete a single post
+module.exports.delete = async (req, res) => {
+    try {
+        // use params to get post id
+        await Posts.findByIdAndDelete(req.params.id)
+        // next we need to remove the id from the array in the user req.id or req.username
+        await User.findByIdAndUpdate(req.id,)
+        ///////////////
+        // UNFINISHED//
+        ///////////////
+    } catch(error) {
+        console.log(error.message)
+        res.json({ error: error.message })
+    }
+}
+// update PUT => edit a single post
+module.exports.update = async (req, res) => {
+    try {
+
+    } catch(error) {
+        console.log(error.message)
+        res.json({ error: error.message })
+    }
+}
+// create POST => create a new post
+module.exports.create = async (req, res) => {
+    try {
+        //create a new post with the form data from body
+        const post = await Posts.create(req.body)
+        // attach the post to the user that created it
+        await User.findByIdAndUpdate(req.id, {
+            $push: {
+                myPosts: post._id
+            }
+        })
+        res.status(200).json(post)
+    } catch(error) {
+        console.log(error.message)
+        res.json({ error: error.message })
+    }
+}
+// show GET => show a single post 
+module.exports.show = async (req, res) => {
+    try {
+
+    } catch(error) {
+        console.log(error.message)
+        res.json({ error: error.message })
+    }
+}
