@@ -24,7 +24,7 @@ const userSchema = new Schema(
             type: Number,
             default: 0,
         },
-        posts: [
+        myPosts: [
             {
                 type: mongoose.Types.ObjectId,
                 // look for this in the posts collection

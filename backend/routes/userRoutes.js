@@ -12,11 +12,9 @@ router.get('/', userController.index)
 router.get('/:id', userController.show)
 
 // AUTH ROUTES these will be moved later
+// register, login, and delete moved to auth routes
 
-// create route aka register aka new POST =>
-router.post('/', userController.create)
-// delete route DELETE =>
-// login route  POST => 
+
 // update route PUT => this route will update the profile information after form submission
 router.put('/:id', userController.update)
 

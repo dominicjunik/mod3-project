@@ -15,18 +15,6 @@ module.exports.index = async (req, res) => {
     }
 }
 
-// create POST => creates a new user
-module.exports.create = async (req, res) => {
-    console.log('POST => /api/users/')
-    console.log(req.body)
-    try {
-        const user = await User.create(req.body)
-        res.json(user)
-    } catch(error) {
-        console.log(error.message)
-        res.json({error: error.message})
-    }
-}
 
 // update PUT => this route updates the user information
 module.exports.update = async (req, res) => {

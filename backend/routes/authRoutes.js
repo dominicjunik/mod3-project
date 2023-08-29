@@ -13,5 +13,5 @@ router.post('/register', authController.register)
 router.post('/login', authController.login)
 
 // delete route DELETE => this route deletes the user
-
+router.delete('/:id', authController.delete)
 module.exports = router
