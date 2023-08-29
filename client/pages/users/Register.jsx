@@ -55,7 +55,7 @@ export default function Register({ setUser }) {
         }
     }
     return (
-        <div>
+        <div className=''>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>

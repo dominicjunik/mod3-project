@@ -43,14 +43,14 @@ export default function App() {
   }, []);
 
   // saving the user name from state into a variable to pass as props and condionally render routes
-  let LoggedInUser = user.username
+  let loggedInUser = user.username
 
   return (
-    <div className="flex justify-center bg-slate-600 h-screen">
-      <Navbar />
+    <div className="bg-slate-600 h-screen w-screen">
+      <Navbar username={loggedInUser} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Navigate />} />
-        {LoggedInUser ? 
+        {loggedInUser ? 
           <>
           </> 
           : 
