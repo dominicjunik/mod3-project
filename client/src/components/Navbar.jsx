@@ -16,10 +16,8 @@ export default function Navbar({ username, setUser }) {
         {username ? (
           <>
             <li>Welcome {username}</li>
-            <li>
-              <li onClick={logout}>
-                <Link to="/posts">Logout</Link>
-              </li>
+            <li onClick={logout}>
+              <Link to="/posts">Logout</Link>
             </li>
           </>
         ) : (

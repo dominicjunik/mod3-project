@@ -4,6 +4,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/users/Register";
 import Login from "./pages/users/Login";
+import Edit from "./pages/posts/Edit";
+import Index from "./pages/posts/Index";
+import New from "./pages/posts/New";
+import Show from "./pages/posts/Show";
+
 
 
 export default function App() {
@@ -50,14 +55,25 @@ export default function App() {
     <div className="flex flex-col items-center bg-slate-600 h-screen">
       <Navbar username={loggedInUser} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<Navigate />} />
-        {loggedInUser ? 
+        {/* these routes are open to anyone */}
+        <Route path='/' element={<Navigate to='/posts' />} />
+        <Route path='/posts' element={<Index user={loggedInUser} />} />
+        <Route path='/posts/:id' element={<Show user={loggedInUser} />} />
+        {loggedInUser ?
+          //these routes require you to be logged in 
           <>
+            <Route path='/posts/new' element={<New user={loggedInUser}/>} />
+            <Route path='/posts/:id/edit' element={<Edit user={loggedInUser} />} />
+            {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
+            {loaded && <Route path='*' element={<Navigate to='/posts' />} />}
           </> 
-          : 
+          :
+          //until logged in, only allow the login/register routes and redirect everything else 
           <>
             <Route path='/register' element={<Register setUser={setUser} />} />
             <Route path='/login' element={<Login setUser={setUser} />} />
+            {/* once the useEffect has completed, if there is no user token, redirect all undeclared routes to login */}
+            {loaded && <Route path='*' element={<Navigate to='/login' />} />}
           </>
         }
       </Routes>
