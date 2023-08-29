@@ -31,9 +31,9 @@ module.exports.update = async (req, res) => {
 
 // show GET => this route will display the profile information and allow it to be editted 
 module.exports.show = async (req, res) => {
-    console.log('GET => /api/users/:id')
+    console.log('GET => /api/users/')
     try {
-        const user = await User.findById(req.params.id)
+        const user = await User.findById(req.id)
         console.log('Found user', user)
         res.json(user)
     } catch(error) {

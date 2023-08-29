@@ -20,6 +20,8 @@ const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
 const postRoutes = require('./routes/postRoutes')
 
+const { authorize } = require('./middleware/authMiddleware')
+
 // middleware for the json
 app.use(express.json())
 // so react can talk with our server
@@ -29,7 +31,7 @@ app.use(cors())
 app.get('/', (req, res) => {res.send('Server says Hi!')})
 
 // after the routes are imported we can set up their directions here
-app.use('/api/users', userRoutes)
+app.use('/api/users', authorize, userRoutes)
 app.use('/auth', authRoutes)
 app.use('/api/posts', postRoutes)
 
