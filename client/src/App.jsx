@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/users/Register";
+import Login from "./pages/users/Login";
 
 
 export default function App() {
@@ -56,6 +57,7 @@ export default function App() {
           : 
           <>
             <Route path='/register' element={<Register setUser={setUser} />} />
+            <Route path='/login' element={<Login setUser={setUser} />} />
           </>
         }
       </Routes>
