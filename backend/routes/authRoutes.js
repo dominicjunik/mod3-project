@@ -5,7 +5,6 @@ const router = express.Router()
 const authController = require('../controllers/authController')
 
 // Protected routes here
-
 // create/register route POST => this route creates a user
 router.post('/register', authController.register)
 
@@ -14,4 +13,5 @@ router.post('/login', authController.login)
 
 // delete route DELETE => this route deletes the user
 router.delete('/:id', authController.delete)
+
 module.exports = router
