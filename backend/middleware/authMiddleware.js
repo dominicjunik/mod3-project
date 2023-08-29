@@ -29,7 +29,7 @@ module.exports.authorize = (req, res, next) => {
         // step 4: run the next function to move on to the route
         next();
     } catch (error) {
-        console.log(err.message);
-        res.status(403).json({ error: err.message });
+        console.log(error.message);
+        res.status(403).json({ error: error.message });
     }
 };

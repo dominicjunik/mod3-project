@@ -20,12 +20,15 @@ module.exports.index = async (req, res) => {
 module.exports.delete = async (req, res) => {
     try {
         // use params to get post id
-        await Posts.findByIdAndDelete(req.params.id)
-        // next we need to remove the id from the array in the user req.id or req.username
-        await User.findByIdAndUpdate(req.id,)
-        ///////////////
-        // UNFINISHED//
-        ///////////////
+        const post = await Posts.findByIdAndDelete(req.params.id)
+        // next we need to remove the id from the myPosts array in the user req.id or req.username
+        await User.findByIdAndUpdate(req.id, {
+            $pull: {
+                myPosts: post._id
+            }
+        })
+        res.status(200).json({message: "post deleted"})
+       
     } catch(error) {
         console.log(error.message)
         res.json({ error: error.message })
