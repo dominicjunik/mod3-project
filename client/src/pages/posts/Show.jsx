@@ -34,29 +34,28 @@ export default function Show({ username }) {
     getPost();
   }, []);
 
-
   // function to reveal the spoiler
   async function makeGuess(totBool) {
-    
     let guess = {
-        username,
-        trick: totBool
-    }
-    let updatedPost = {...post}
-    updatedPost.solvedBy.push(guess)
-    console.log(updatedPost)
+      username,
+      trick: totBool,
+    };
+    let updatedPost = { ...post };
+    updatedPost.solvedBy.push(guess);
+    console.log(updatedPost);
     try {
-        // send a put request to update the post with the user selection
-        const response = await axios.put(`/api/posts/${id}`, updatedPost, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-        console.log(response)
-    } catch(error) {
-        console.log(error.message)
+      // send a put request to update the post with the user selection
+      const response = await axios.put(`/api/posts/${id}`, updatedPost, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
     }
-    setTot(totBool)
+    setTot(totBool);
+    setPost(updatedPost);
   }
 
   return (
@@ -67,16 +66,26 @@ export default function Show({ username }) {
       </div>
       {tot.username ? (
         <>
-          <div className="flex flex-col items-center justify-center">          
+          <div className="flex flex-col items-center justify-center">
             <p>{post.spoiler}</p>
-            <p className={tot.trick === post.trick ? 'text-green-500': 'text-red-500'}>It was a {post.trick ? "Trick": "Treat"}</p>
+            <p
+              className={
+                tot.trick === post.trick ? "text-green-500" : "text-red-500"
+              }
+            >
+              It was a {post.trick ? "Trick" : "Treat"}
+            </p>
           </div>
         </>
       ) : (
         <>
-        <div className="flex justify-center">
-            <button onClick={() => makeGuess(true)} className="m-4">Trick</button>
-            <button onClick={() => makeGuess(false)} className="mx-4">Treat</button>
+          <div className="flex justify-center">
+            <button onClick={() => makeGuess(true)} className="m-4">
+              Trick
+            </button>
+            <button onClick={() => makeGuess(false)} className="mx-4">
+              Treat
+            </button>
           </div>
         </>
       )}
