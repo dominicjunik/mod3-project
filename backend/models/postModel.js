@@ -27,8 +27,12 @@ const postSchema = new Schema({
     dislikes: {type: Number, default: 0},
     // the 
     solvedBy: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'solvedBy'
+        username: {
+            type: String
+        },
+        trick: {
+            type: Boolean
+        }
     }]
 
 }, { timestamps: true })

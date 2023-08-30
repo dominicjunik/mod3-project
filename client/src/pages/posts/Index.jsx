@@ -25,8 +25,8 @@ export default function Index({ username }) {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center">TRICK OR TREAT</h1>
+    <div className="flex flex-col justify-center">
+      <h1 className="text-center m-4">TRICK OR TREAT</h1>
       {username ? <button onClick={() => navigate('/posts/new')}>NEW POST</button> : null}
       <div>
         {posts.map((post, i) => (

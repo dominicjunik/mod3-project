@@ -9,8 +9,6 @@ import Index from "./pages/posts/Index";
 import New from "./pages/posts/New";
 import Show from "./pages/posts/Show";
 
-
-
 export default function App() {
   // holds the user data after we fetch it with the token
   const [user, setUser] = useState({});
@@ -38,44 +36,58 @@ export default function App() {
   }
 
   useEffect(() => {
-    // on page load get the token from local storage 
-    let token = localStorage.getItem("token")
+    // on page load get the token from local storage
+    let token = localStorage.getItem("token");
     // if there is a token run the getUser function with it, else set the state so the routes become functional
     if (token) {
-      getUser(token)
+      getUser(token);
     } else {
-      setLoaded(true)
+      setLoaded(true);
     }
   }, []);
 
   // saving the user name from state into a variable to pass as props and condionally render routes
-  let loggedInUser = user.username
+  let loggedInUser = user.username;
 
   return (
     <div className="flex flex-col items-center bg-slate-600 h-screen">
       <Navbar username={loggedInUser} setUser={setUser} />
       <Routes>
-        {/* these routes are open to anyone */}
-        <Route path='/' element={<Navigate to='/posts' />} />
-        <Route path='/posts' element={<Index username={loggedInUser} />} />
-        <Route path='/posts/:id' element={<Show username={loggedInUser} />} />
-        {loggedInUser ?
-          //these routes require you to be logged in 
+        {/* these routes are open to anyone but have to make sure the state variable has been updated to pass props */}
+        {loaded && (
           <>
-            <Route path='/posts/new' element={<New username={loggedInUser}/>} />
-            <Route path='/posts/:id/edit' element={<Edit username={loggedInUser} />} />
-            {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
-            {loaded && <Route path='*' element={<Navigate to='/posts' />} />}
-          </> 
-          :
-          //until logged in, only allow the login/register routes and redirect everything else 
-          <>
-            <Route path='/register' element={<Register setUser={setUser} />} />
-            <Route path='/login' element={<Login setUser={setUser} />} />
-            {/* once the useEffect has completed, if there is no user token, redirect all undeclared routes to login */}
-            {loaded && <Route path='*' element={<Navigate to='/login' />} />}
+            <Route path="/" element={<Navigate to="/posts" />} />
+            <Route path="/posts" element={<Index username={loggedInUser} />} />
+            <Route
+              path="/posts/:id"
+              element={<Show username={loggedInUser} />}
+            />
           </>
-        }
+        )}
+
+        {loggedInUser ? (
+          //these routes require you to be logged in
+          <>
+            <Route
+              path="/posts/new"
+              element={<New username={loggedInUser} />}
+            />
+            <Route
+              path="/posts/:id/edit"
+              element={<Edit username={loggedInUser} />}
+            />
+            {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
+            {loaded && <Route path="*" element={<Navigate to="/posts" />} />}
+          </>
+        ) : (
+          //until logged in, only allow the login/register routes and redirect everything else
+          <>
+            <Route path="/register" element={<Register setUser={setUser} />} />
+            <Route path="/login" element={<Login setUser={setUser} />} />
+            {/* once the useEffect has completed, if there is no user token, redirect all undeclared routes to login */}
+            {loaded && <Route path="*" element={<Navigate to="/login" />} />}
+          </>
+        )}
       </Routes>
     </div>
   );
