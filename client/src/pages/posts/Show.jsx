@@ -14,7 +14,7 @@ export default function Show({ username }) {
     try {
       // get request with the url params saved into a variable
       const response = await axios.get(`/api/posts/${id}`);
-      // console.log(response)
+    //   console.log(response)
       // post data saved to state
       response.data;
       setPost(response.data);
@@ -54,7 +54,9 @@ export default function Show({ username }) {
     } catch (error) {
       console.log(error.message);
     }
-    setTot(totBool);
+    // setTot is supposed to be an object and you are making it a boolean
+    
+    setTot(guess);
     setPost(updatedPost);
   }
 
