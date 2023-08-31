@@ -12,6 +12,7 @@ export default function Index({ username }) {
   async function seed() {
     try{
         await axios.post("/api/posts/seed")
+        navigate('/')
     } catch (error) {
       console.log(error.message);
     }

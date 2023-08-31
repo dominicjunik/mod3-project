@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Show({ username }) {
+    const [loaded, setLoaded] = useState(false)
   // state variable to save the post data inside
   const [post, setPost] = useState({});
   // state variable for rendering the Trick Or Treat spoiler of the post
@@ -32,6 +33,7 @@ export default function Show({ username }) {
       // if the request sends a Bad Request error, redirect to the index
       if(error.request.status === 400) {navigate('/posts')} 
     }
+    setLoaded(true)
   }
   // on page load get the post data
   useEffect(() => {
@@ -67,6 +69,7 @@ export default function Show({ username }) {
   ///////////
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
+    
     <div className="m-4 bg-slate-700 p-2">
       <div className="flex">
         <p>{post.teaser}</p>
