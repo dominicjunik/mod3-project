@@ -43,6 +43,7 @@ export default function Index({ username }) {
           <div key={i} className="m-4 bg-slate-700 p-2">
             <a href={`/posts/${post._id}`} >
               <p>{post.teaser}</p>
+              
               <p>{post.candyPoints}pts</p>
               <p>+{post.likes}</p>
               <p>-{post.dislikes}</p>

@@ -42,7 +42,7 @@ export default function Show({ username }) {
   async function makeGuess(totBool) {
     let guess = {
       username,
-      trick: totBool,
+      trick: totBool
     };
     let updatedPost = { ...post };
     updatedPost.solvedBy.push(guess);
@@ -81,7 +81,7 @@ export default function Show({ username }) {
                 tot.trick === post.trick ? "text-green-500" : "text-red-500"
               }
             >
-              It was a {post.trick ? "Trick" : "Treat"}
+              {tot.trick === post.trick ? post.correctGuess : post.wrongGuess}
             </p>
           </div>
         </>
