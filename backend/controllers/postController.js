@@ -2,8 +2,22 @@
 const Posts = require('../models/postModel')
 // might need the user model as well
 const User = require('../models/userModel')
+// import the seed data
+const posts = require('../models/posts')
 
-// seed route 
+// seed route
+module.exports.seed = async (req, res) => {
+    try {
+        await Posts.deleteMany({})
+        await Posts.create(posts)
+        res.status(200).json({message: 'seeded database'})
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({ error: error.message })
+    }
+}
+
 // index GET => display all posts
 module.exports.index = async (req, res) => {
     try {

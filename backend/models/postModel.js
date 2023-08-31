@@ -5,12 +5,16 @@ const Schema = mongoose.Schema
 const postSchema = new Schema({
     // not sure if this is the right data type,
     // but i want to be able to display the information about the user that created the post
-    createdBy: { type: mongoose.Types.ObjectId },
+    createdBy: { type: String },
     teaser: { 
         type: String,
         required: true
     },
-    spoiler: {
+    correctGuess: {
+        type: String,
+        required: true
+    },
+    wrongGuess: {
         type: String,
         required: true
     },

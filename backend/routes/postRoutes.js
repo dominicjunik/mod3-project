@@ -8,7 +8,7 @@ const { authorize } = require('../middleware/authMiddleware')
 
 //post routes here
 // seed
-// router.post('/seed', postController.seed)
+router.post('/seed', postController.seed)
 // index
 router.get('/', postController.index)
 // delete

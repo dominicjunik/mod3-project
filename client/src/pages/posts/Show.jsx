@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Show({ username }) {
   // state variable to save the post data inside
@@ -9,12 +9,14 @@ export default function Show({ username }) {
   const [tot, setTot] = useState({});
   // saving the database object id from the url parameters
   const { id } = useParams();
+  // to redirect if they try and go to a post with a bad id
+  const navigate = useNavigate()
   // function to request the post data from the server
   async function getPost() {
     try {
       // get request with the url params saved into a variable
       const response = await axios.get(`/api/posts/${id}`);
-    //   console.log(response)
+      console.log(response)
       // post data saved to state
       response.data;
       setPost(response.data);
@@ -26,7 +28,9 @@ export default function Show({ username }) {
         setTot(prevSolve);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      // if the request sends a Bad Request error, redirect to the index
+      if(error.request.status === 400) {navigate('/posts')} 
     }
   }
   // on page load get the post data
@@ -52,6 +56,7 @@ export default function Show({ username }) {
       });
       console.log(response);
     } catch (error) {
+      alert('You must register or login before playing')  
       console.log(error.message);
     }
     // setTot is supposed to be an object and you are making it a boolean
@@ -59,7 +64,8 @@ export default function Show({ username }) {
     setTot(guess);
     setPost(updatedPost);
   }
-
+  ///////////
+  // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
     <div className="m-4 bg-slate-700 p-2">
       <div className="flex">

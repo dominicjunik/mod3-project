@@ -2,11 +2,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Index({ username }) {
   // this will store the posts from the DB to map onto the page
   const [posts, setPosts] = useState([]);
   // navigate for button routing
   const navigate = useNavigate();
+
+  async function seed() {
+    try{
+        await axios.post("/api/posts/seed")
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   async function getPosts() {
     try {
@@ -27,6 +36,7 @@ export default function Index({ username }) {
   return (
     <div className="flex flex-col justify-center">
       <h1 className="text-center m-4">TRICK OR TREAT</h1>
+      <button onClick={()=>seed()}>Seed</button>
       {username ? <button onClick={() => navigate('/posts/new')}>NEW POST</button> : null}
       <div>
         {posts.map((post, i) => (
