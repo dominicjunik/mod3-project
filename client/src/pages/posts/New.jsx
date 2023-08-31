@@ -29,11 +29,12 @@ export default function New({ username }) {
       //   console.log(newPost);
     } catch (error) {
       console.log(error.message);
+      alert('please login again')
     }
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-screen">
       <h1>Create a Trick or Treat</h1>
       <form
         onSubmit={handleSubmit}

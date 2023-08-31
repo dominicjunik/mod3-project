@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Show({ username }) {
-    const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
   // state variable to save the post data inside
   const [post, setPost] = useState({});
   // state variable for rendering the Trick Or Treat spoiler of the post
@@ -11,13 +11,13 @@ export default function Show({ username }) {
   // saving the database object id from the url parameters
   const { id } = useParams();
   // to redirect if they try and go to a post with a bad id
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // function to request the post data from the server
   async function getPost() {
     try {
       // get request with the url params saved into a variable
       const response = await axios.get(`/api/posts/${id}`);
-      console.log(response)
+      console.log(response);
       // post data saved to state
       response.data;
       setPost(response.data);
@@ -31,9 +31,11 @@ export default function Show({ username }) {
     } catch (error) {
       console.log(error);
       // if the request sends a Bad Request error, redirect to the index
-      if(error.request.status === 400) {navigate('/posts')} 
+      if (error.request.status === 400) {
+        navigate("/posts");
+      }
     }
-    setLoaded(true)
+    setLoaded(true);
   }
   // on page load get the post data
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function Show({ username }) {
   async function makeGuess(totBool) {
     let guess = {
       username,
-      trick: totBool
+      trick: totBool,
     };
     let updatedPost = { ...post };
     updatedPost.solvedBy.push(guess);
@@ -58,52 +60,53 @@ export default function Show({ username }) {
       });
       console.log(response);
     } catch (error) {
-      alert('You must register or login before playing')  
+      alert("You must register or login before playing");
       console.log(error.message);
     }
     // setTot is supposed to be an object and you are making it a boolean
-    
+
     setTot(guess);
     setPost(updatedPost);
   }
   ///////////
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
-    
-    <div className="m-4 bg-slate-700 p-2">
-      <div className="flex">
-        <p>{post.teaser}</p>
-        <p className="ml-4">{post.candyPoints}pts</p>
-      </div>
-      {tot.username ? (
-        <>
-          <div className="flex flex-col items-center justify-center">
-            <p>{post.spoiler}</p>
-            <p
-              className={
-                tot.trick === post.trick ? "text-green-500" : "text-red-500"
-              }
-            >
-              {tot.trick === post.trick ? post.correctGuess : post.wrongGuess}
-            </p>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="flex justify-center">
-            <button onClick={() => makeGuess(true)} className="m-4">
-              Trick
-            </button>
-            <button onClick={() => makeGuess(false)} className="mx-4">
-              Treat
-            </button>
-          </div>
-        </>
-      )}
+    <div className=" h-screen">
+      <div className="bg-slate-700 m-4 p-2">
+        <div className="flex">
+          <p>{post.teaser}</p>
+          <p className="ml-4">{post.candyPoints}pts</p>
+        </div>
+        {tot.username ? (
+          <>
+            <div className="flex flex-col items-center justify-center">
+              <p>{post.spoiler}</p>
+              <p
+                className={
+                  tot.trick === post.trick ? "text-green-500" : "text-red-500"
+                }
+              >
+                {tot.trick === post.trick ? post.correctGuess : post.wrongGuess}
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex justify-center">
+              <button onClick={() => makeGuess(true)} className="m-4">
+                Trick
+              </button>
+              <button onClick={() => makeGuess(false)} className="mx-4">
+                Treat
+              </button>
+            </div>
+          </>
+        )}
 
-      <div className="flex justify-end">
-        <button>+{post.likes}</button>
-        <button className="ml-2">-{post.dislikes}</button>
+        <div className="flex justify-end">
+          <button>+{post.likes}</button>
+          <button className="ml-2">-{post.dislikes}</button>
+        </div>
       </div>
     </div>
   );

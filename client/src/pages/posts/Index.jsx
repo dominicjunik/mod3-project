@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Index({ username }) {
   // this will store the posts from the DB to map onto the page
   const [posts, setPosts] = useState([]);
@@ -10,9 +9,9 @@ export default function Index({ username }) {
   const navigate = useNavigate();
 
   async function seed() {
-    try{
-        await axios.post("/api/posts/seed")
-        navigate('/')
+    try {
+      await axios.post("/api/posts/seed");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }
@@ -37,17 +36,23 @@ export default function Index({ username }) {
   return (
     <div className="flex flex-col justify-center">
       <h1 className="text-center m-4">TRICK OR TREAT</h1>
-      <button onClick={()=>seed()}>Seed</button>
-      {username ? <button onClick={() => navigate('/posts/new')}>NEW POST</button> : null}
+      <button onClick={() => seed()}>Seed</button>
+      {username ? (
+        <button onClick={() => navigate("/posts/new")}>NEW POST</button>
+      ) : null}
       <div>
         {posts.map((post, i) => (
-          <div key={i} className="m-4 bg-slate-700 p-2">
-            <a href={`/posts/${post._id}`} >
-              <p>{post.teaser}</p>
-              
-              <p>{post.candyPoints}pts</p>
-              <p>+{post.likes}</p>
-              <p>-{post.dislikes}</p>
+          <div key={i} className=" flex m-4  ">
+            <div className="flex items-center justify-center bg-slate-700 w-20 h-20 rounded-full m-2 text-center">
+              <p>{post.createdBy}</p>
+            </div>
+            <a href={`/posts/${post._id}`}>
+              <div className="bg-slate-700 m-2 p-2 w-fit">
+                <p>{post.teaser}</p>
+                <p>{post.candyPoints}pts</p>
+                <p>+{post.likes}</p>
+                <p>-{post.dislikes}</p>
+              </div>
             </a>
           </div>
         ))}
