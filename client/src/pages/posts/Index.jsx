@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Index({ username }) {
   // this will store the posts from the DB to map onto the page
@@ -40,21 +40,21 @@ export default function Index({ username }) {
       {username ? (
         <button onClick={() => navigate("/posts/new")}>NEW POST</button>
       ) : null}
-      <div>
+      <div className="">
         {posts.map((post, i) => (
-          <div key={i} className=" flex m-4  ">
+          
+            <Link key={i} to={`/posts/${post._id}`} className=" flex m-4 flex-row">
             <div className="flex flex-wrap items-center justify-center bg-slate-700 w-20 h-20 rounded-full m-2 text-center">
-              <p className="min-w-0 break-words">{post.createdBy}</p> 
+              <p className="min-w-0 break-words m-2">{post.candyPoints}pts</p> 
             </div>
-            <a href={`/posts/${post._id}`}>
-              <div className="bg-slate-700 m-2 p-2 w-fit">
+            
+              <div className="bg-slate-700 m-2 p-2 w-10/12 md:w-96">
                 <p>{post.teaser}</p>
-                <p>{post.candyPoints}pts</p>
-                <p>+{post.likes}</p>
-                <p>-{post.dislikes}</p>
+                <p></p>
+               
               </div>
-            </a>
-          </div>
+            </Link>
+        
         ))}
       </div>
     </div>

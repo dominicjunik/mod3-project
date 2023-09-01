@@ -22,7 +22,7 @@ module.exports.seed = async (req, res) => {
 module.exports.index = async (req, res) => {
     try {
         // get all the posts and sort by likes
-        const posts = await Posts.find().sort({ likes: 1 })
+        const posts = await Posts.find().sort({ candyPoints: -1 })
         // send them out
         res.status(200).json(posts)
     } catch(error) {

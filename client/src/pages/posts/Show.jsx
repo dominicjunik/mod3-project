@@ -60,6 +60,7 @@ export default function Show({ username }) {
       console.log(response);
     } catch (error) {
       alert("You must register or login before playing");
+      
       console.log(error.message);
     }
     // setTot is supposed to be an object and you are making it a boolean
