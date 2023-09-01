@@ -22,7 +22,7 @@ const userSchema = new Schema(
         },
         candyPoints: {
             type: Number,
-            default: 0,
+            default: 100,
         },
         myPosts: [
             {

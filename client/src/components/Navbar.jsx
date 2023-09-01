@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Navbar({ username, setUser }) {
+export default function Navbar({ username, user, setUser }) {
   // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
   function logout() {
     localStorage.removeItem("token");
@@ -15,7 +15,7 @@ export default function Navbar({ username, setUser }) {
         </li>
         {username ? (
           <>
-            <li>Welcome {username}</li>
+            <li>Welcome {username} you have {user.candyPoints} points</li>
             <li onClick={logout}>
               <Link to="/posts">Logout</Link>
             </li>

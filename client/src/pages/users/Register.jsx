@@ -52,6 +52,7 @@ export default function Register({ setUser }) {
             navigate('/posts')
         } catch(error) {
             console.log(error.message)
+            alert('username already exists')
         }
     }
     return (

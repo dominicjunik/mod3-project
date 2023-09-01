@@ -19,7 +19,6 @@ export default function Show({ username }) {
       const response = await axios.get(`/api/posts/${id}`);
       console.log(response);
       // post data saved to state
-      response.data;
       setPost(response.data);
       let solvedBy = response.data.solvedBy;
       const prevSolve = solvedBy.find((user) => user.username === username);
@@ -86,7 +85,7 @@ export default function Show({ username }) {
   ///////////
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
-    <div className=" h-screen">
+    <div className=" min-h-screen">
       <div className="bg-slate-700 m-4 p-2">
         <div className="flex">
           <p>{post.teaser}</p>
@@ -125,7 +124,8 @@ export default function Show({ username }) {
           <button className="ml-2">-{post.dislikes}</button>
         </div>
       </div>
-      {username === post.createdBy ? (
+      {/* if the user exists and matches the post created by -> render edit/delete buttons */}
+      {username === post.createdBy && username !== undefined ? (
         <>
           <button onClick={() => navigate(`/posts/${id}/edit`)}>Edit</button>{" "}
           <button onClick={deletePost}>Delete</button>

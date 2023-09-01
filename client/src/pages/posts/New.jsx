@@ -34,7 +34,7 @@ export default function New({ username }) {
   }
 
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center min-h-screen">
       <h1>Create a Trick or Treat</h1>
       <form
         onSubmit={handleSubmit}
