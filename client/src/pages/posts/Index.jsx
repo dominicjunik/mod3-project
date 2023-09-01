@@ -43,8 +43,8 @@ export default function Index({ username }) {
       <div>
         {posts.map((post, i) => (
           <div key={i} className=" flex m-4  ">
-            <div className="flex items-center justify-center bg-slate-700 w-20 h-20 rounded-full m-2 text-center">
-              <p>{post.createdBy}</p>
+            <div className="flex items-center justify-center break-words bg-slate-700 w-20 h-20 rounded-full m-2 text-center">
+              {post.createdBy}
             </div>
             <a href={`/posts/${post._id}`}>
               <div className="bg-slate-700 m-2 p-2 w-fit">
