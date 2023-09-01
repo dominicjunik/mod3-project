@@ -4,11 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function Edit({ username }) {
   const [loaded, setLoaded] = useState(false);
-  // state variable to save the form data
+  // state variable to save the post data inside then update with the the form data
   const [form, setForm] = useState({});
-  // state variable to save the post data inside
-  const [post, setPost] = useState({});
-  // saving the database object id from the url parameters
+   // saving the database object id from the url parameters
   const { id } = useParams();
   // to redirect after submission
   const navigate = useNavigate();
@@ -20,7 +18,7 @@ export default function Edit({ username }) {
       const response = await axios.get(`/api/posts/${id}`);
       console.log(response);
       // post data saved to state
-      setPost(response.data);
+      setForm(response.data);
       if (username !== response.data.createdBy) {
         console.log("bad user");
         navigate("/posts");
@@ -51,7 +49,7 @@ export default function Edit({ username }) {
     e.preventDefault();
     try {
       // spread the original post data into the new object, then spread the updated form inputs
-      let updatedPost = { ...post, ...form };
+      let updatedPost = { ...form };
       console.log(updatedPost)
       // send create request to the server with our token
       await axios.put(`/api/posts/${id}`, updatedPost, {
@@ -85,7 +83,7 @@ export default function Edit({ username }) {
           className="p-1"
           required
           onChange={handleChange}
-          defaultValue={post.teaser}
+          defaultValue={form.teaser}
         />
 
         <fieldset>
@@ -97,7 +95,7 @@ export default function Edit({ username }) {
               id="trick"
               name="trick"
               value={true}
-              checked={post.tricked ? true : false}
+              defaultChecked={(form.trick === true)}
               required
               onChange={handleChange}
             />
@@ -108,7 +106,7 @@ export default function Edit({ username }) {
               id="treat"
               name="trick"
               value={false}
-              checked={post.tricked ? false : true}
+              defaultChecked={form.trick === false}
               onChange={handleChange}
             />
           </div>
@@ -119,7 +117,7 @@ export default function Edit({ username }) {
           name="candyPoints"
           id="candyPoints"
           required
-          defaultValue={post.candyPoints}
+          defaultValue={form.candyPoints}
           onChange={handleChange}
         />
         <label htmlFor="correctGuess">If they guess correct?</label>
@@ -130,7 +128,7 @@ export default function Edit({ username }) {
           rows="2"
           className="p-1"
           required
-          defaultValue={post.correctGuess}
+          defaultValue={form.correctGuess}
           onChange={handleChange}
         />
         <label htmlFor="wrongGuess">If they get it wrong...</label>
@@ -141,7 +139,7 @@ export default function Edit({ username }) {
           rows="2"
           className="p-1"
           required
-          defaultValue={post.wrongGuess}
+          defaultValue={form.wrongGuess}
           onChange={handleChange}
         />
         <button className="text-2xl">Update</button>
