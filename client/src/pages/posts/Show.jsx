@@ -68,6 +68,21 @@ export default function Show({ username }) {
     setTot(guess);
     setPost(updatedPost);
   }
+
+  // function to delete the post if the user owns it
+  async function deletePost() {
+    try {
+      await axios.delete(`/api/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+    navigate('/posts')
+  }
+
   ///////////
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
@@ -81,11 +96,13 @@ export default function Show({ username }) {
           <>
             <div className="flex flex-col items-center justify-center">
               <p>{post.spoiler}</p>
+              {/* based on guess text color -> correct green, wrong red*/}
               <p
                 className={
                   tot.trick === post.trick ? "text-green-500" : "text-red-500"
                 }
               >
+                {/* display the corresponding message based on if they guessed correctly */}
                 {tot.trick === post.trick ? post.correctGuess : post.wrongGuess}
               </p>
             </div>
@@ -108,6 +125,12 @@ export default function Show({ username }) {
           <button className="ml-2">-{post.dislikes}</button>
         </div>
       </div>
+      {username === post.createdBy ? (
+        <>
+          <button onClick={() => navigate(`/posts/${id}/edit`)}>Edit</button>{" "}
+          <button onClick={deletePost}>Delete</button>
+        </>
+      ) : null}
     </div>
   );
 }

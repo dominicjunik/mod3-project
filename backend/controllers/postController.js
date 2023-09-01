@@ -81,7 +81,12 @@ module.exports.show = async (req, res) => {
     try {
         // find the post and send it back
         const post = await Posts.findById(req.params.id)
-        res.status(200).json(post)
+        if(post) {
+            res.status(200).json(post)
+        } else {
+            res.status(400).json({message: 'post does not exist'})
+        }
+        
     } catch(error) {
         console.log(error.message)
         res.status(400).json({ error: error.message })
