@@ -35,7 +35,7 @@ export default function Index({ username }) {
 
   return (
     <div className="flex flex-col justify-center">
-      <h1 className="text-center m-4">TRICK OR TREAT</h1>
+      <h1 className="text-center m-4">TRICK OR TWEET</h1>
       <button onClick={() => seed()}>Seed</button>
       {username ? (
         <button onClick={() => navigate("/posts/new")}>NEW POST</button>

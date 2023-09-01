@@ -64,10 +64,14 @@ module.exports.create = async (req, res) => {
     try {
         //create a new post with the form data from body
         const post = await Posts.create(req.body)
+        console.log(req.body.candyPoints)
         // attach the post to the user that created it
         await User.findByIdAndUpdate(req.id, {
             $push: {
                 myPosts: post._id
+            },
+            $inc: {
+                candyPoints: (-req.body.candyPoints)
             }
         })
         res.status(200).json(post)

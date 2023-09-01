@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function New({ username }) {
+export default function New({ username, user, setUser }) {
   // state variable to save the form data
   const [form, setForm] = useState({});
   // to redirect after submission
@@ -18,18 +18,26 @@ export default function New({ username }) {
     e.preventDefault();
     try {
       // create the post structure from the form and add the username
-      let newPost = { ...form, createdBy: username };
+      let newPost = { ...form, createdBy: user.username };
+      // create a variable to see if the user is wagering more than they have
+      const balance = user.candyPoints - newPost.candyPoints
+      // if they are kick them out of the request with an alert message
+      if (balance < 0){
+        return alert('not enough candy, go get more!')
+      }
       // send create request to the server with our token
       await axios.post("/api/posts/", newPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      // update the users local state so the displays show properly
+      setUser({...user, candyPoints: balance})
       navigate('/posts')
       //   console.log(newPost);
     } catch (error) {
       console.log(error.message);
-      alert('please login again')
+     // alert('please login again')
     }
   }
 

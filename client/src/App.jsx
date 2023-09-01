@@ -70,7 +70,7 @@ export default function App() {
           <>
             <Route
               path="/posts/new"
-              element={<New username={loggedInUser} />}
+              element={<New username={loggedInUser} setUser={setUser} user={user}/>}
             />
             <Route
               path="/posts/:id/edit"
