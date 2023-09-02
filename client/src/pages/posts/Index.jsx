@@ -47,11 +47,11 @@ export default function Index({ user }) {
       ) : null}
       <div className="">
         {posts.map((post, i) => {
-            // if the logged in user has solved this post save the data into this variable
+          // if the logged in user has solved this post save the data into this variable
           let solved = post.solvedBy.find(
             (peep) => peep.username === user.username
           );
-          
+
           console.log(solved);
           return (
             <Link
@@ -60,11 +60,16 @@ export default function Index({ user }) {
               className=" flex m-4 flex-row"
             >
               {solved ? (
-                <><div
-                className={`flex flex-wrap items-center justify-center ${solved.correct ? `bg-green-500` : `bg-red-500`} w-20 h-20 rounded-full m-2 text-center`}
-              >
-                
-              </div></>
+                <>
+                  <div
+                    className={`flex flex-wrap items-center justify-center ${
+                      solved.correct ? `bg-green-500` : `bg-red-500`
+                    } w-20 h-20 rounded-full m-2 text-center`}
+                  ><p className="min-w-0 break-words m-2">
+                        {solved.correct?'+':'-'}{post.candyPoints}pts
+                    </p></div>
+                  
+                </>
               ) : (
                 <>
                   <div

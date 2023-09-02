@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center bg-slate-600 min-h-screen">
-      <Navbar username={loggedInUser} user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser} />
       <Routes>
         {/* these routes are open to anyone but have to make sure the state variable has been updated to pass props */}
         {loaded && (
@@ -60,7 +60,7 @@ export default function App() {
             <Route path="/posts" element={<Index user={user}/>} />
             <Route
               path="/posts/:id"
-              element={<Show username={loggedInUser} />}
+              element={<Show user={user} setUser={setUser}/>}
             />
           </>
         )}

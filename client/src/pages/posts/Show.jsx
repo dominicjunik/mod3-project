@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function Show({ username }) {
+export default function Show({ user, setUser }) {
   const [loaded, setLoaded] = useState(false);
   // state variable to save the post data inside
   const [post, setPost] = useState({});
@@ -23,7 +23,9 @@ export default function Show({ username }) {
       // isolate the solved by array
       let solvedBy = response.data.solvedBy;
       // find if the user has solved this post before
-      const prevSolve = solvedBy.find((user) => user.username === username);
+      const prevSolve = solvedBy.find(
+        (person) => person.username === user.username
+      );
       // console.log(prevSolve);
       if (prevSolve.username) {
         console.log("you already solved this one");
@@ -45,34 +47,56 @@ export default function Show({ username }) {
 
   // function to reveal the spoiler
   async function makeGuess(totBool) {
+    // first check if they can make the wager
+    if (user.candyPoints - post.candyPoints < 0) {
+      return alert("Not enough candy to gamble");
+    }
     // evalute if the guess is correct or not
     let correct = totBool === post.trick;
     // format the data into the object for the solvedBy array
     let guess = {
-      username,
+      username: user.username,
       trick: totBool,
       correct,
     };
+    // next spread the user and the post into new objects to be updated and then saved back into state
+    let updatedUser = { ...user };
     let updatedPost = { ...post };
     updatedPost.solvedBy.push(guess);
     console.log(updatedPost);
     try {
       // send a put request to update the post with the user selection
-      const response = await axios.put(`/api/posts/${id}`, updatedPost, {
+      const postResponse = await axios.put(`/api/posts/${id}`, updatedPost, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(response);
+      console.log(postResponse);
+      
+      if (guess.correct) {
+        updatedUser.candyPoints += post.candyPoints;
+      } else {
+        updatedUser.candyPoints -= post.candyPoints;
+      }
+      const userResponse = await axios.put(
+        `/api/users/${user._id}`,
+        updatedUser,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
     } catch (error) {
       alert("You must register or login before playing");
 
       console.log(error.message);
     }
-    // setTot is supposed to be an object and you are making it a boolean
-
+    // update the states so the front end renders everything
+    setUser(updatedUser);
     setTot(guess);
     setPost(updatedPost);
+    
   }
 
   // function to delete the post if the user owns it
@@ -128,7 +152,7 @@ export default function Show({ username }) {
         </div> */}
       </div>
       {/* if the user exists and matches the post created by -> render edit/delete buttons */}
-      {username === post.createdBy && username !== undefined ? (
+      {user.username === post.createdBy && user.username !== undefined ? (
         <>
           <button onClick={() => navigate(`/posts/${id}/edit`)}>Edit</button>{" "}
           <button onClick={deletePost}>Delete</button>
