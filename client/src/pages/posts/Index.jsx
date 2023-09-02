@@ -65,10 +65,12 @@ export default function Index({ user }) {
                     className={`flex flex-wrap items-center justify-center ${
                       solved.correct ? `bg-green-500` : `bg-red-500`
                     } w-20 h-20 rounded-full m-2 text-center`}
-                  ><p className="min-w-0 break-words m-2">
-                        {solved.correct?'+':'-'}{post.candyPoints}pts
-                    </p></div>
-                  
+                  >
+                    <p className="min-w-0 break-words m-2">
+                      {solved.correct ? "+" : "-"}
+                      {post.candyPoints}pts
+                    </p>
+                  </div>
                 </>
               ) : (
                 <>
@@ -86,9 +88,12 @@ export default function Index({ user }) {
                 <p>{post.teaser}</p>
                 {console.log(post.createdBy, user.username)}
                 {/* display "You" instead of your username if it is your post */}
-                <p className="text-right">
+                <div className="flex justify-between">
+                  <span className="text-left">
+                    guesses: {post.solvedBy.length}
+                  </span>
                   {post.createdBy === user.username ? "You" : post.createdBy}
-                </p>
+                </div>
               </div>
             </Link>
           );

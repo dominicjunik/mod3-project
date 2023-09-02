@@ -51,7 +51,7 @@ export default function Show({ user, setUser }) {
     if (user.candyPoints - post.candyPoints < 0) {
       return alert("Not enough candy to gamble");
     }
-    // evalute if the guess is correct or not
+    // evaluate if the guess is correct or not
     let correct = totBool === post.trick;
     // format the data into the object for the solvedBy array
     let guess = {
@@ -62,41 +62,38 @@ export default function Show({ user, setUser }) {
     // next spread the user and the post into new objects to be updated and then saved back into state
     let updatedUser = { ...user };
     let updatedPost = { ...post };
+    // save the user guess info into the post
     updatedPost.solvedBy.push(guess);
     console.log(updatedPost);
+    // add/subract points based on their guess and save that into the user
+    if (guess.correct) {
+      updatedUser.candyPoints += post.candyPoints;
+    } else {
+      updatedUser.candyPoints -= post.candyPoints;
+    }
+    let betPackage = {
+      updatedPost,
+      updatedUser,
+      correct,
+    };
+    console.log(betPackage);
     try {
-      // send a put request to update the post with the user selection
-      const postResponse = await axios.put(`/api/posts/${id}`, updatedPost, {
+      // send a bet request to the server with our super object
+      const betResponse = await axios.put(`/api/posts/${id}/bet`, betPackage, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(postResponse);
-      
-      if (guess.correct) {
-        updatedUser.candyPoints += post.candyPoints;
-      } else {
-        updatedUser.candyPoints -= post.candyPoints;
-      }
-      const userResponse = await axios.put(
-        `/api/users/${user._id}`,
-        updatedUser,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      console.log(betResponse)
     } catch (error) {
       alert("You must register or login before playing");
-
+      navigate("/login");
       console.log(error.message);
     }
     // update the states so the front end renders everything
     setUser(updatedUser);
     setTot(guess);
     setPost(updatedPost);
-    
   }
 
   // function to delete the post if the user owns it

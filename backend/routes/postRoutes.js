@@ -13,6 +13,8 @@ router.post('/seed', postController.seed)
 router.get('/', postController.index)
 // delete
 router.delete('/:id', authorize, postController.delete)
+// bet
+router.put('/:id/bet', authorize, postController.bet)
 // update
 router.put('/:id', authorize, postController.update)
 // create
