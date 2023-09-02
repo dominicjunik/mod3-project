@@ -120,10 +120,10 @@ export default function Show({ username }) {
           </>
         )}
 
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <button>+{post.likes}</button>
           <button className="ml-2">-{post.dislikes}</button>
-        </div>
+        </div> */}
       </div>
       {/* if the user exists and matches the post created by -> render edit/delete buttons */}
       {username === post.createdBy && username !== undefined ? (

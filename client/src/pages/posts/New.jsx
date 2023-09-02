@@ -17,13 +17,21 @@ export default function New({ username, user, setUser }) {
     // page reload bad
     e.preventDefault();
     try {
+      // create an object of user data for the solvedBy array
+      let userObj = {
+        username,
+        trick: form.trick,
+      };
       // create the post structure from the form and add the username
       let newPost = { ...form, createdBy: user.username };
+      // push user into solvedBy array so they cannot solve their own post
+      newPost.solvedBy = []
+      newPost.solvedBy.push(userObj)
       // create a variable to see if the user is wagering more than they have
-      const balance = user.candyPoints - newPost.candyPoints
+      const balance = user.candyPoints - newPost.candyPoints;
       // if they are kick them out of the request with an alert message
-      if (balance < 0){
-        return alert('not enough candy, go get more!')
+      if (balance < 0) {
+        return alert("not enough candy, go get more!");
       }
       // send create request to the server with our token
       await axios.post("/api/posts/", newPost, {
@@ -32,12 +40,12 @@ export default function New({ username, user, setUser }) {
         },
       });
       // update the users local state so the displays show properly
-      setUser({...user, candyPoints: balance})
-      navigate('/posts')
-      //   console.log(newPost);
+      setUser({ ...user, candyPoints: balance });
+      navigate("/posts");
+        console.log(newPost);
     } catch (error) {
       console.log(error.message);
-     // alert('please login again')
+      // alert('please login again')
     }
   }
 
