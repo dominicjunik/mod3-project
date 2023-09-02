@@ -36,6 +36,9 @@ const postSchema = new Schema({
         },
         trick: {
             type: Boolean
+        },
+        correct: {
+            type: Boolean
         }
     }]
 

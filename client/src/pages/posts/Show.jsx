@@ -20,9 +20,11 @@ export default function Show({ username }) {
       console.log(response);
       // post data saved to state
       setPost(response.data);
+      // isolate the solved by array
       let solvedBy = response.data.solvedBy;
+      // find if the user has solved this post before
       const prevSolve = solvedBy.find((user) => user.username === username);
-      console.log(prevSolve);
+      // console.log(prevSolve);
       if (prevSolve.username) {
         console.log("you already solved this one");
         setTot(prevSolve);
@@ -43,9 +45,13 @@ export default function Show({ username }) {
 
   // function to reveal the spoiler
   async function makeGuess(totBool) {
+    // evalute if the guess is correct or not
+    let correct = totBool === post.trick;
+    // format the data into the object for the solvedBy array
     let guess = {
       username,
       trick: totBool,
+      correct,
     };
     let updatedPost = { ...post };
     updatedPost.solvedBy.push(guess);
@@ -60,7 +66,7 @@ export default function Show({ username }) {
       console.log(response);
     } catch (error) {
       alert("You must register or login before playing");
-      
+
       console.log(error.message);
     }
     // setTot is supposed to be an object and you are making it a boolean
@@ -80,7 +86,7 @@ export default function Show({ username }) {
     } catch (error) {
       console.log(error.message);
     }
-    navigate('/posts')
+    navigate("/posts");
   }
 
   ///////////
@@ -97,13 +103,9 @@ export default function Show({ username }) {
             <div className="flex flex-col items-center justify-center">
               <p>{post.spoiler}</p>
               {/* based on guess text color -> correct green, wrong red*/}
-              <p
-                className={
-                  tot.trick === post.trick ? "text-green-500" : "text-red-500"
-                }
-              >
+              <p className={tot.correct ? "text-green-500" : "text-red-500"}>
                 {/* display the corresponding message based on if they guessed correctly */}
-                {tot.trick === post.trick ? post.correctGuess : post.wrongGuess}
+                {tot.correct ? post.correctGuess : post.wrongGuess}
               </p>
             </div>
           </>

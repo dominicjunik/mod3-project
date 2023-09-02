@@ -57,7 +57,7 @@ export default function App() {
         {loaded && (
           <>
             <Route path="/" element={<Navigate to="/posts" />} />
-            <Route path="/posts" element={<Index username={loggedInUser}/>} />
+            <Route path="/posts" element={<Index user={user}/>} />
             <Route
               path="/posts/:id"
               element={<Show username={loggedInUser} />}
@@ -70,7 +70,7 @@ export default function App() {
           <>
             <Route
               path="/posts/new"
-              element={<New username={loggedInUser} setUser={setUser} user={user}/>}
+              element={<New setUser={setUser} user={user}/>}
             />
             <Route
               path="/posts/:id/edit"

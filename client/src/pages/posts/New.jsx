@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function New({ username, user, setUser }) {
+export default function New({ user, setUser }) {
   // state variable to save the form data
   const [form, setForm] = useState({});
   // to redirect after submission
@@ -19,8 +19,9 @@ export default function New({ username, user, setUser }) {
     try {
       // create an object of user data for the solvedBy array
       let userObj = {
-        username,
+        username: user.username,
         trick: form.trick,
+        correct: true
       };
       // create the post structure from the form and add the username
       let newPost = { ...form, createdBy: user.username };
