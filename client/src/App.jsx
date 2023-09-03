@@ -48,9 +48,9 @@ export default function App() {
 
   // saving the user name from state into a variable to pass as props and condionally render routes
   let loggedInUser = user.username;
-
+  
   return (
-    <div className="flex flex-col items-center bg-black text-yellow-300 min-h-screen">
+    <div className="flex flex-col items-center bg-ghost bg-center md:bg-cover text-white min-h-screen">
       <Navbar user={user} setUser={setUser} />
       <Routes>
         {/* these routes are open to anyone but have to make sure the state variable has been updated to pass props */}

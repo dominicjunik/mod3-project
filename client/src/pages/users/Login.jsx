@@ -78,6 +78,7 @@ export default function Login({ setUser }) {
                     name="password"
                     onChange={handleChange}
                     value={form.password}
+                    className='text-black'
                 />
                 <br /><br />
                 <button>Submit</button>

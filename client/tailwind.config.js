@@ -14,7 +14,15 @@ export default {
         secondary: 'rgb(255, 214, 112)',
         tertiary: 'rgb(51, 153, 137)',
         text: '#170D2E'
-      }
+      }, 
+      boxShadow: {    
+      },
+      backgroundImage: {
+        'halloween': "url('./src/assets/halloween-castle.png')",
+        'moon': "url('./src/assets/cloudmoon.gif')",
+        'occult': "url('./src/assets/occult.png')",
+        'ghost': "url(./src/assets/ghost.png)"
+        },
     },
   },
   plugins: [],

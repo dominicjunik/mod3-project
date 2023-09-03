@@ -39,8 +39,10 @@ export default function Index({ user }) {
   //
   console.log();
   return (
-    <div className="flex flex-col justify-center ">
-      <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-primary to-pink-600">TRICK OR TWEET</h1>
+    <div className="flex flex-col justify-center">
+      <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800">
+        TRICK OR TWEET
+      </h1>
       <button onClick={() => seed()}>Seed</button>
       {user.username ? (
         <button onClick={() => navigate("/posts/new")}>NEW POST</button>
@@ -57,12 +59,12 @@ export default function Index({ user }) {
             <Link
               key={i}
               to={`/posts/${post._id}`}
-              className=" flex m-4 flex-row"
+              className=" flex m-4 flex-row group"
             >
               {solved ? (
                 <>
                   <div
-                    className={`flex flex-wrap items-center justify-center ${
+                    className={`flex flex-wrap items-center justify-center border-2 border-transparent group-hover:border-white ${
                       solved.correct ? `bg-green-600` : `bg-red-700`
                     } w-20 h-20 rounded-full m-2 text-center  `}
                   >
@@ -77,7 +79,7 @@ export default function Index({ user }) {
               ) : (
                 <>
                   <div
-                    className={`flex flex-wrap items-center justify-center bg-blue-950 w-20 h-20 rounded-full m-2 text-center `}
+                    className={`flex flex-wrap items-center justify-center border-2 border-transparent group-hover:border-white group-hover:bg-black/80 bg-black/90 w-20 h-20 rounded-full m-2 text-center `}
                   >
                     <p className="min-w-0 break-words m-2">
                       {post.candyPoints}pts
@@ -86,7 +88,7 @@ export default function Index({ user }) {
                 </>
               )}
 
-              <div className="flex flex-col justify-between border-transparent border-2 hover:border-white bg-gradient-to-r from-primaryTransp to-orange-500 m-2 p-2 w-10/12 md:w-96 rounded-e-2xl rounded-s-md">
+              <div className="flex flex-col justify-between border-2 border-transparent group-hover:border-white bg-black/90 group-hover:bg-black/80 m-2 p-2 w-10/12 md:w-96 rounded-2xl">
                 <p>{post.teaser}</p>
                 {console.log(post.createdBy, user.username)}
                 {/* display "You" instead of your username if it is your post */}

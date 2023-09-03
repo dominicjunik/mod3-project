@@ -8,14 +8,14 @@ export default function Navbar({ user, setUser }) {
   }
 
   return (
-    <nav className="w-screen bg-gradient-to-r from-primaryTransp to-orange-500 rounded-b-xl">
+    <nav className="w-screen bg-black/90 rounded-b-xl ">
       <ul className="flex flex-row justify-evenly p-1">
         <li>
-          <Link to="/" className="hover:text-white">Home</Link>
+          <Link to="/" className="hover:underline">Home</Link>
         </li>
         {user.username ? (
           <>
-            <li>Welcome {user.username} you have {user.candyPoints} points</li>
+            <li >Welcome {user.username} you have {user.candyPoints} points</li>
             <li onClick={logout}>
               <Link to="/posts" className="hover:underline">Logout</Link>
             </li>
@@ -23,10 +23,10 @@ export default function Navbar({ user, setUser }) {
         ) : (
           <>
             <li>
-              <Link to="/register" className="hover:text-secondary">Register</Link>
+              <Link to="/register" className="hover:underline ">Register</Link>
             </li>
             <li>
-              <Link to="/login" className="hover:text-secondary">Login</Link>
+              <Link to="/login" className="hover:underline">Login</Link>
             </li>
           </>
         )}
