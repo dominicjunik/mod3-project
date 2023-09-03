@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Candy from "../../components/Candy";
 
 export default function Index({ user }) {
   // this will store the posts from the DB to map onto the page
@@ -33,13 +34,8 @@ export default function Index({ user }) {
     getPosts();
   }, []);
   console.log(user);
-  //   // creating a variable to represent if the post is owned by the user
-
-  //   // variable to represent if the user has solved this post
-  //
-  console.log();
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center">  
       <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800">
         TRICK OR TWEET
       </h1>
@@ -64,15 +60,15 @@ export default function Index({ user }) {
               {solved ? (
                 <>
                   <div
-                    className={`flex flex-wrap items-center justify-center border-2 border-transparent group-hover:border-white ${
-                      solved.correct ? `bg-green-600` : `bg-red-700`
-                    } w-20 h-20 rounded-full m-2 text-center  `}
+                    className={`flex flex-wrap items-center justify-center border-2 border-black font-semibold group-hover:border-white ${
+                      solved.correct ? ` bg-gradient-to-tl from-black to-green-500/90` : `bg-gradient-to-tl from-black to-red-500/90`
+                    } w-20 h-20 rounded-full m-2 text-center bg-black/90 `}
                   >
                     <p className="min-w-0 break-words m-2">
                       {/* conditional rendering to display if the user won or lost points on a post, no symbol for own posts */}
                       {post.createdBy !== user.username &&
                         (solved.correct ? "+" : "-")}
-                      {post.candyPoints}pts
+                      {post.candyPoints}
                     </p>
                   </div>
                 </>
@@ -81,14 +77,14 @@ export default function Index({ user }) {
                   <div
                     className={`flex flex-wrap items-center justify-center border-2 border-transparent group-hover:border-white group-hover:bg-black/80 bg-black/90 w-20 h-20 rounded-full m-2 text-center `}
                   >
-                    <p className="min-w-0 break-words m-2">
-                      {post.candyPoints}pts
+                    <p className="flex items-center min-w-0 break-words m-2 text-xl">
+                      {post.candyPoints}<Candy />
                     </p>
                   </div>
                 </>
               )}
 
-              <div className="flex flex-col justify-between border-2 border-transparent group-hover:border-white bg-black/90 group-hover:bg-black/80 m-2 p-2 w-10/12 md:w-96 rounded-2xl">
+              <div className="flex flex-col justify-between border-2 border-transparent group-hover:border-white bg-black/90 group-hover:bg-black/80 m-2 p-2 w-10/12 md:w-96  rounded-2xl">
                 <p>{post.teaser}</p>
                 {console.log(post.createdBy, user.username)}
                 {/* display "You" instead of your username if it is your post */}
