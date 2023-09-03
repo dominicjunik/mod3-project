@@ -5,5 +5,8 @@
 @layer base {
   * {
     @apply box-border;
-  } 
+  }
+  .font-outline-2 {
+    -webkit-text-stroke: 1px rgb(240, 149, 22);
+  }
 }

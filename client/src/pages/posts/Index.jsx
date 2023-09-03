@@ -36,12 +36,12 @@ export default function Index({ user }) {
   console.log(user);
   return (
     <div className="flex flex-col justify-center">  
-      <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800">
+      <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
         TRICK OR TWEET
       </h1>
-      <button onClick={() => seed()}>Seed</button>
+      <button onClick={() => seed()} className="">Seed</button>
       {user.username ? (
-        <button onClick={() => navigate("/posts/new")}>NEW POST</button>
+        <button onClick={() => navigate("/posts/new")} className="m-2 p-2 rounded-2xl border-transparent border-2 hover:border-white  bg-black/90 hover:bg-black/80">NEW TRICK-OR-TWEET</button>
       ) : null}
       <div className="">
         {posts.map((post, i) => {
@@ -61,14 +61,14 @@ export default function Index({ user }) {
                 <>
                   <div
                     className={`flex flex-wrap items-center justify-center border-2 border-black font-semibold group-hover:border-white ${
-                      solved.correct ? ` bg-gradient-to-tl from-black to-green-500/90` : `bg-gradient-to-tl from-black to-red-500/90`
+                      solved.correct ? ` bg-gradient-to-tl from-black to-green-500/90` : `bg-gradient-to-tl from-black to-red-600/90`
                     } w-20 h-20 rounded-full m-2 text-center bg-black/90 `}
                   >
-                    <p className="min-w-0 break-words m-2">
+                    <p className="flex items-center min-w-0 break-words m-2 text-xl">
                       {/* conditional rendering to display if the user won or lost points on a post, no symbol for own posts */}
                       {post.createdBy !== user.username &&
                         (solved.correct ? "+" : "-")}
-                      {post.candyPoints}
+                      {post.candyPoints}<Candy/>
                     </p>
                   </div>
                 </>
