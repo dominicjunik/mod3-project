@@ -41,7 +41,7 @@ export default function Index({ user }) {
       </h1>
       <button onClick={() => seed()} className="">Seed</button>
       {user.username ? (
-        <button onClick={() => navigate("/posts/new")} className="m-2 p-2 rounded-2xl border-transparent border-2 hover:border-white  bg-black/90 hover:bg-black/80">NEW TRICK-OR-TWEET</button>
+            <button onClick={() => navigate("/posts/new")} className="mx-7 p-3 rounded-2xl border-transparent border-2 hover:border-white  bg-black/90 hover:bg-black/80 hover:underline">CREATE NEW POST</button>
       ) : null}
       <div className="">
         {posts.map((post, i) => {
