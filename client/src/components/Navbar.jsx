@@ -8,25 +8,25 @@ export default function Navbar({ user, setUser }) {
   }
 
   return (
-    <nav className="w-screen bg-slate-700">
+    <nav className="w-screen bg-gradient-to-r from-primaryTransp to-orange-500 rounded-b-xl">
       <ul className="flex flex-row justify-evenly p-1">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className="hover:text-white">Home</Link>
         </li>
         {user.username ? (
           <>
             <li>Welcome {user.username} you have {user.candyPoints} points</li>
             <li onClick={logout}>
-              <Link to="/posts">Logout</Link>
+              <Link to="/posts" className="hover:underline">Logout</Link>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to="/register">Register</Link>
+              <Link to="/register" className="hover:text-secondary">Register</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="hover:text-secondary">Login</Link>
             </li>
           </>
         )}

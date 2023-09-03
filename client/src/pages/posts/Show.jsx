@@ -114,7 +114,7 @@ export default function Show({ user, setUser }) {
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
     <div className=" min-h-screen">
-      <div className="bg-slate-700 m-4 p-2">
+      <div className="bg-gradient-to-r from-primaryTransp to-orange-500 rounded-2xl m-4 p-4">
         <div className="flex">
           <p>{post.teaser}</p>
           <p className="ml-4">{post.candyPoints}pts</p>
@@ -124,7 +124,7 @@ export default function Show({ user, setUser }) {
             <div className="flex flex-col items-center justify-center">
               <p>{post.spoiler}</p>
               {/* based on guess text color -> correct green, wrong red*/}
-              <p className={tot.correct ? "text-green-500" : "text-red-500"}>
+              <p className={tot.correct ? "text-green-600" : "text-red-700"}>
                 {/* display the corresponding message based on if they guessed correctly */}
                 {tot.correct ? post.correctGuess : post.wrongGuess}
               </p>
