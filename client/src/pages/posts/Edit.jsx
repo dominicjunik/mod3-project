@@ -76,26 +76,26 @@ export default function Edit({ username, setUser }) {
   function showEdit(){
     return (
         <div className="flex flex-col items-center min-h-screen">
-            <h1>Edit Post</h1>
+            <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Edit Post</h1>
             <form
         onSubmit={handleSubmit}
         className="flex flex-col w-screen items-center"
       >
-        <label htmlFor="teaser">Set the scene:</label>
+        <label htmlFor="teaser" className="text-xl bg-black/90 rounded-lg px-2 ">Set the scene:</label>
         <textarea
           name="teaser"
           id="teaser"
           cols="50"
           rows="4"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           onChange={handleChange}
           defaultValue={form.teaser}
         />
 
-        <fieldset>
-          <legend>Is this a Trick or a Treat?</legend>
-          <div className="flex justify-center">
+        <fieldset className="m-2">
+          <legend className="text-xl bg-black/90 rounded-lg px-2 ">Is this a Trick or a Treat?</legend>
+          <div className="flex justify-center bg-black/80 rounded-lg text-lg">
             <label htmlFor="trick">Trick</label>
             <input
               type="radio"
@@ -118,38 +118,39 @@ export default function Edit({ username, setUser }) {
             />
           </div>
         </fieldset>
-        <label htmlFor="candyPoints">How much candy is at stake?</label>
+        <label htmlFor="candyPoints" className="text-xl bg-black/90 rounded-lg px-2 flex">How much candy is at stake?</label>
         <input
           type="number"
           name="candyPoints"
           id="candyPoints"
           required
+          className="p-1 rounded-lg bg-black/80"
           defaultValue={form.candyPoints}
           onChange={handleChange}
         />
-        <label htmlFor="correctGuess">If they guess correct?</label>
+        <label htmlFor="correctGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they guess correct?</label>
         <textarea
           name="correctGuess"
           id="correctGuess"
           cols="50"
           rows="2"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           defaultValue={form.correctGuess}
           onChange={handleChange}
         />
-        <label htmlFor="wrongGuess">If they get it wrong...</label>
+        <label htmlFor="wrongGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they get it wrong...</label>
         <textarea
           name="wrongGuess"
           id="wrongGuess"
           cols="50"
           rows="2"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           defaultValue={form.wrongGuess}
           onChange={handleChange}
         />
-        <button className="text-2xl">Update</button>
+        <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Update</button>
       </form>
 
         </div>
