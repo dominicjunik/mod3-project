@@ -33,7 +33,7 @@ export default function New({ user, setUser }) {
       const balance = user.candyPoints - newPost.candyPoints;
       // if they are kick them out of the request with an alert message
       if (balance < 0) {
-        return alert("not enough candy, go get more!");
+        return alert("not enough candy, visit profile page to more!");
       }
       // send create request to the server with our token
       await axios.post("/api/posts/", newPost, {

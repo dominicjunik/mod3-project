@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Candy from "../../components/Candy"
 
 
 export default function Profile({user, setUser}) {
@@ -80,6 +81,24 @@ console.log(form)
         }
     }
 
+    async function handleCandy(event){
+        // ALWAYS PREVENT THE RELOAD 
+        // event.preventDefault()
+        try {
+            const updatedUser = await axios.put(`/api/users/${user._id}`, { candyPoints: 100 }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            // console.log(updatedUser)
+            setUser(updatedUser.data)
+
+        } catch(error) {
+            console.log(error.message)
+            alert(error.message)
+        }
+    }
+
     // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
     function logout() {
         localStorage.removeItem("token");
@@ -89,6 +108,7 @@ console.log(form)
 return (
     <div className="flex flex-col items-center min-h-full">
             <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Profile</h1>
+           
             <details className="m-4">
                 <summary className=" text-4xl bg-black/90 px-2 pb-1 rounded-lg text-center">EDIT</summary>
                 <form onSubmit={handleSubmit} className="flex flex-col items-center bg-black/70 p-4 rounded-xl w-auto">
@@ -135,7 +155,15 @@ return (
                 <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Submit</button>
             </form>
             </details>
+
+            {user.candyPoints < 100 ? <button onClick={handleCandy} className="flex items-center m-4 bg-black/90 p-2 rounded-xl border-transparent border-2 hover:border-white hover:underline transform active:scale-95 transition-transform">GET MORE CANDY <Candy/></button> : null}
            
+            <button
+          onClick={() => navigate(`/posts/`)}
+          className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white"
+        >
+          Back
+        </button>
         </div>
 )
 }

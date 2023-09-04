@@ -46,7 +46,7 @@ export default function Index({ user }) {
       <h1 className="text-center m-4 mb-4 sm:mb-16 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
         TRICK OR TWEET
       </h1>
-      {/* <button onClick={()=>seed()}>seed</button> */}
+      <button onClick={()=>seed()}>seed</button>
       {user.username ? (
             <button onClick={() => navigate("/posts/new")} className="mx-7 p-3 rounded-2xl border-transparent border-2 hover:border-white  bg-black/90 hover:bg-black/80 hover:underline">CREATE NEW POST</button>
       ) : null}
