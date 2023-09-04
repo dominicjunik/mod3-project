@@ -46,6 +46,12 @@ export default function Show({ user, setUser }) {
     getPost();
   }, []);
 
+  // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
+  function logout() {
+    localStorage.removeItem("token");
+    setUser({});
+  }
+
   // function to reveal the spoiler
   async function makeGuess(totBool) {
     // first check if they can make the wager
@@ -88,8 +94,10 @@ export default function Show({ user, setUser }) {
       console.log(betResponse);
     } catch (error) {
       alert("You must register or login before playing");
+      logout();
       navigate("/login");
       console.log(error.message);
+      return;
     }
     // update the states so the front end renders everything
     setUser(updatedUser);
@@ -106,7 +114,11 @@ export default function Show({ user, setUser }) {
         },
       });
     } catch (error) {
+      alert("Session expired: You must login before deleting this post");
+      logout();
+      navigate("/login");
       console.log(error.message);
+      return;
     }
     navigate("/posts");
   }
@@ -118,17 +130,24 @@ export default function Show({ user, setUser }) {
       <div className="bg-black/90 rounded-2xl mt-40 p-4">
         {tot.username ? (
           <>
-          <div className={`flex ${tot.correct ? "text-green-600" : "text-red-700"}`}>
-          <p >{post.teaser}</p>
-          <p className="ml-4 flex items-center">{tot.correct ? "+" : "-"}{post.candyPoints}<Candy/></p>
-        </div>
+            <div
+              className={`flex ${
+                tot.correct ? "text-green-600" : "text-red-700"
+              }`}
+            >
+              <p>{post.teaser}</p>
+              <p className="ml-4 flex items-center">
+                {tot.correct ? "+" : "-"}
+                {post.candyPoints}
+                <Candy />
+              </p>
+            </div>
             <div className="flex flex-col items-center justify-center">
               {/* based on guess text color -> correct green, wrong red*/}
               <p className={tot.correct ? "text-green-600" : "text-red-700"}>
                 {/* display the corresponding message based on if they guessed correctly */}
                 {tot.correct ? post.correctGuess : post.wrongGuess}
               </p>
-              
             </div>
           </>
         ) : (
@@ -158,16 +177,29 @@ export default function Show({ user, setUser }) {
         )}
       </div>
       {/* if the user exists and matches the post created by -> render edit/delete buttons */}
-      <div className="flex justify-between">
-      <button onClick={() => navigate(`/posts/`)} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Back</button>
-      {user.username === post.createdBy && user.username !== undefined ? (
-        <div className="flex justify-end">
-          
-          
-          <button onClick={() => navigate(`/posts/${id}/edit`)} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Edit</button>
-          <button onClick={deletePost} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Delete</button>
-        </div>
-      ) : null}
+      <div className="flex">
+        <button
+          onClick={() => navigate(`/posts/`)}
+          className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white"
+        >
+          Back
+        </button>
+        {user.username === post.createdBy && user.username !== undefined ? (
+          <div className="flex justify-end">
+            <button
+              onClick={() => navigate(`/posts/${id}/edit`)}
+              className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white"
+            >
+              Edit
+            </button>
+            <button
+              onClick={deletePost}
+              className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white"
+            >
+              Delete
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

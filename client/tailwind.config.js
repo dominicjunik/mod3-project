@@ -15,7 +15,8 @@ export default {
         primaryTransp: 'rgb(255, 74, 28, 0.816)',
         secondary: 'rgb(255, 214, 112)',
         tertiary: 'rgb(51, 153, 137)',
-        text: '#170D2E'
+        text: '#170D2E',
+        greengood: '#3d9900'
       }, 
       boxShadow: {    
       },

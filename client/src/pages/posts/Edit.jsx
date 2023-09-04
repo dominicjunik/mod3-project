@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function Edit({ username }) {
+export default function Edit({ username, setUser }) {
   const [loaded, setLoaded] = useState(false);
   // state variable to save the post data inside then update with the the form data
   const [form, setForm] = useState({});
@@ -38,6 +38,12 @@ export default function Edit({ username }) {
     getPost();
   }, []);
 
+  // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
+  function logout() {
+    localStorage.removeItem("token");
+    setUser({});
+  }
+
   // function to handle the inputs of the form
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -61,7 +67,8 @@ export default function Edit({ username }) {
       //   console.log(updatedPost);
     } catch (error) {
       console.log(error.message);
-      alert('error somehow')
+      alert('Session expired: You must login before editting this post')
+      logout()
     }
   }
 

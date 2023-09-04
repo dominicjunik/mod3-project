@@ -45,13 +45,14 @@ export default function App() {
       setLoaded(true);
     }
   }, []);
+  
 
   // saving the user name from state into a variable to pass as props and condionally render routes
   let loggedInUser = user.username;
   
   return (
     <div className="flex flex-col items-center bg-ghost bg-center md:bg-cover text-white min-h-screen">
-      <Navbar user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser}/>
       <Routes>
         {/* these routes are open to anyone but have to make sure the state variable has been updated to pass props */}
         {loaded && (
@@ -70,11 +71,11 @@ export default function App() {
           <>
             <Route
               path="/posts/new"
-              element={<New setUser={setUser} user={user}/>}
+              element={<New  user={user} setUser={setUser}/>}
             />
             <Route
               path="/posts/:id/edit"
-              element={<Edit username={loggedInUser} />}
+              element={<Edit username={loggedInUser} setUser={setUser}/>}
             />
             {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
             {loaded && <Route path="*" element={<Navigate to="/posts" />} />}

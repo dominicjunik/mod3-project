@@ -46,8 +46,16 @@ export default function New({ user, setUser }) {
         console.log(newPost);
     } catch (error) {
       console.log(error.message);
-      // alert('please login again')
+      alert('Session expired: You must login before creating a post')
+      logout()
+      navigate("/login")
     }
+  }
+
+  // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
+  function logout() {
+    localStorage.removeItem("token");
+    setUser({});
   }
 
   return (

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Candy from "../../components/Candy";
+import { User, UserCheck } from "react-feather"
 
 export default function Index({ user }) {
   // this will store the posts from the DB to map onto the page
@@ -9,6 +10,7 @@ export default function Index({ user }) {
   // navigate for button routing
   const navigate = useNavigate();
 
+  // this seeds the database with a fresh set of data
   async function seed() {
     try {
       await axios.post("/api/posts/seed");
@@ -18,6 +20,7 @@ export default function Index({ user }) {
     }
   }
 
+  // get posts from database
   async function getPosts() {
     try {
       // request all the posts from the database
@@ -33,6 +36,9 @@ export default function Index({ user }) {
   useEffect(() => {
     getPosts();
   }, []);
+
+
+  
   console.log(user);
   return (
     <div className="flex flex-col justify-center">  
@@ -61,8 +67,8 @@ export default function Index({ user }) {
               {solved ? (
                 <>
                   <div
-                    className={`flex flex-wrap items-center justify-center border-2 border-yellow-500 font-semibold group-hover:border-white ${
-                      solved.correct ? ` bg-green-600/90` : `bg-gradient-to-tl from-black to-red-600/90`
+                    className={`flex flex-wrap items-center justify-center border-2 break-words border-yellow-500 font-semibold group-hover:border-white ${
+                      solved.correct ? `bg-gradient-to-tl from-black to-green-500/90` : `bg-gradient-to-tl from-black to-red-600/90`
                     } w-20 h-20 rounded-full m-2 text-center bg-black/90 `}
                   >
                     <p className="flex items-center min-w-0 break-words m-2 text-xl">
@@ -90,9 +96,9 @@ export default function Index({ user }) {
                 {console.log(post.createdBy, user.username)}
                 {/* display "You" instead of your username if it is your post */}
                 <div className="flex justify-between">
-                  <span className="text-left">
-                    guesses: {post.solvedBy.length}
-                  </span>
+                  
+                    <div className="flex"> {post.solvedBy.length}<UserCheck className="mx-2"/></div>
+                  
                   {post.createdBy === user.username ? <span className="text-yellow-400">You</span> : post.createdBy}
                 </div>
               </div>
