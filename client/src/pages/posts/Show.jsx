@@ -126,39 +126,29 @@ export default function Show({ user, setUser }) {
   ///////////
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
-    <div className=" min-h-screen">
-      <div className="bg-black/90 rounded-2xl mt-40 p-4">
+    <div className=" min-h-full max-w-lg">
+      <div className="bg-black/90 rounded-2xl mt-8 sm:mt-40 p-4 flex flex-col items-center">
         {tot.username ? (
           <>
-            <div
-              className={`flex ${
-                tot.correct ? "text-green-600" : "text-red-700"
-              }`}
-            >
-              <p>{post.teaser}</p>
-              <p className="ml-4 flex items-center">
-                {tot.correct ? "+" : "-"}
-                {post.candyPoints}
-                <Candy />
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              {/* based on guess text color -> correct green, wrong red*/}
-              <p className={tot.correct ? "text-green-600" : "text-red-700"}>
-                {/* display the corresponding message based on if they guessed correctly */}
-                {tot.correct ? post.correctGuess : post.wrongGuess}
-              </p>
-            </div>
+          <div className={`flex flex-col items-center ${tot.correct ? "text-green-600" : "text-red-700"}`}>
+            <p className="flex items-center text-lg">
+              {tot.correct ? "+" : "-"}
+              {post.candyPoints}
+              <Candy />
+            </p>
+            <p>{post.teaser}</p>
+            <p>
+              {/* display the corresponding message based on if they guessed correctly */}
+              {tot.correct ? post.correctGuess : post.wrongGuess}
+            </p></div>
           </>
         ) : (
           <>
-            <div className="flex">
-              <p>{post.teaser}</p>
-              <p className="ml-4 flex items-center">
-                {post.candyPoints}
-                <Candy />
-              </p>
-            </div>
+            <p className="flex items-center">
+              {post.candyPoints}
+              <Candy />
+            </p>
+            <p>{post.teaser}</p>
             <div className="flex justify-center">
               <button
                 onClick={() => makeGuess(true)}
@@ -177,7 +167,7 @@ export default function Show({ user, setUser }) {
         )}
       </div>
       {/* if the user exists and matches the post created by -> render edit/delete buttons */}
-      <div className="flex">
+      <div className="flex justify-between">
         <button
           onClick={() => navigate(`/posts/`)}
           className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white"

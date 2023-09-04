@@ -10,7 +10,7 @@ const User = require("../models/userModel");
 function generateToken(user) {
     const payload = { id: user._id, username: user.username };
     // expires is in seconds
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 5 });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 300 });
     return token
 }
 
