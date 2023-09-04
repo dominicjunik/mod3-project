@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { User } from "react-feather"
 import Candy from "./Candy";
 
 export default function Navbar({ user, setUser }) {
@@ -16,7 +17,7 @@ export default function Navbar({ user, setUser }) {
         </li>
         {user.username ? (
           <>
-            <li className="flex items-center">Welcome {user.username} you have {user.candyPoints}<Candy/></li>
+            <li className="flex items-center group"><div className="bg-user group-hover:bg-user-plus w-6 h-6 text-white mx-1 "/> {user.username} <Candy/>{user.candyPoints}</li>
             <li onClick={logout}>
               <Link to="/posts" className="hover:underline">Logout</Link>
             </li>

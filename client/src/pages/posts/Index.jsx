@@ -36,10 +36,11 @@ export default function Index({ user }) {
   console.log(user);
   return (
     <div className="flex flex-col justify-center">  
-      <h1 className="text-center m-4 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
+    
+      <h1 className="text-center m-4 mb-10 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
         TRICK OR TWEET
       </h1>
-      <button onClick={() => seed()} className="">Seed</button>
+      <button onClick={()=>seed()}>seed</button>
       {user.username ? (
             <button onClick={() => navigate("/posts/new")} className="mx-7 p-3 rounded-2xl border-transparent border-2 hover:border-white  bg-black/90 hover:bg-black/80 hover:underline">CREATE NEW POST</button>
       ) : null}
@@ -60,8 +61,8 @@ export default function Index({ user }) {
               {solved ? (
                 <>
                   <div
-                    className={`flex flex-wrap items-center justify-center border-2 border-black font-semibold group-hover:border-white ${
-                      solved.correct ? ` bg-gradient-to-tl from-black to-green-500/90` : `bg-gradient-to-tl from-black to-red-600/90`
+                    className={`flex flex-wrap items-center justify-center border-2 border-yellow-500 font-semibold group-hover:border-white ${
+                      solved.correct ? ` bg-green-600/90` : `bg-gradient-to-tl from-black to-red-600/90`
                     } w-20 h-20 rounded-full m-2 text-center bg-black/90 `}
                   >
                     <p className="flex items-center min-w-0 break-words m-2 text-xl">
@@ -92,7 +93,7 @@ export default function Index({ user }) {
                   <span className="text-left">
                     guesses: {post.solvedBy.length}
                   </span>
-                  {post.createdBy === user.username ? "You" : post.createdBy}
+                  {post.createdBy === user.username ? <span className="text-yellow-400">You</span> : post.createdBy}
                 </div>
               </div>
             </Link>

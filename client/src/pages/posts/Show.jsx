@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Candy from "../../components/Candy";
 
 export default function Show({ user, setUser }) {
   const [loaded, setLoaded] = useState(false);
@@ -84,7 +85,7 @@ export default function Show({ user, setUser }) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(betResponse)
+      console.log(betResponse);
     } catch (error) {
       alert("You must register or login before playing");
       navigate("/login");
@@ -114,47 +115,60 @@ export default function Show({ user, setUser }) {
   // COULD USE AN IS LOADING FUNCTION SO THE PAGE DOESNT CRASH ON A BAD ID
   return (
     <div className=" min-h-screen">
-      <div className="bg-gradient-to-r from-primaryTransp to-orange-500 rounded-2xl m-4 p-4">
-        <div className="flex">
-          <p>{post.teaser}</p>
-          <p className="ml-4">{post.candyPoints}pts</p>
-        </div>
+      <div className="bg-black/90 rounded-2xl mt-40 p-4">
         {tot.username ? (
           <>
+          <div className={`flex ${tot.correct ? "text-green-600" : "text-red-700"}`}>
+          <p >{post.teaser}</p>
+          <p className="ml-4 flex items-center">{tot.correct ? "+" : "-"}{post.candyPoints}<Candy/></p>
+        </div>
             <div className="flex flex-col items-center justify-center">
-              <p>{post.spoiler}</p>
               {/* based on guess text color -> correct green, wrong red*/}
               <p className={tot.correct ? "text-green-600" : "text-red-700"}>
                 {/* display the corresponding message based on if they guessed correctly */}
                 {tot.correct ? post.correctGuess : post.wrongGuess}
               </p>
+              
             </div>
           </>
         ) : (
           <>
+            <div className="flex">
+              <p>{post.teaser}</p>
+              <p className="ml-4 flex items-center">
+                {post.candyPoints}
+                <Candy />
+              </p>
+            </div>
             <div className="flex justify-center">
-              <button onClick={() => makeGuess(true)} className="m-4">
+              <button
+                onClick={() => makeGuess(true)}
+                className="m-4 px-2 rounded-lg border border-transparent hover:border-white"
+              >
                 Trick
               </button>
-              <button onClick={() => makeGuess(false)} className="mx-4">
+              <button
+                onClick={() => makeGuess(false)}
+                className="m-4 px-2 rounded-lg border border-transparent hover:border-white"
+              >
                 Treat
               </button>
             </div>
           </>
         )}
-
-        {/* <div className="flex justify-end">
-          <button>+{post.likes}</button>
-          <button className="ml-2">-{post.dislikes}</button>
-        </div> */}
       </div>
       {/* if the user exists and matches the post created by -> render edit/delete buttons */}
+      <div className="flex justify-between">
+      <button onClick={() => navigate(`/posts/`)} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Back</button>
       {user.username === post.createdBy && user.username !== undefined ? (
-        <>
-          <button onClick={() => navigate(`/posts/${id}/edit`)}>Edit</button>{" "}
-          <button onClick={deletePost}>Delete</button>
-        </>
+        <div className="flex justify-end">
+          
+          
+          <button onClick={() => navigate(`/posts/${id}/edit`)} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Edit</button>
+          <button onClick={deletePost} className="m-2 bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Delete</button>
+        </div>
       ) : null}
+      </div>
     </div>
   );
 }
