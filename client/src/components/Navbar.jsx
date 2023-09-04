@@ -17,7 +17,7 @@ export default function Navbar({ user, setUser }) {
         </li>
         {user.username ? (
           <>
-            <li className="flex items-center group"><div className="bg-user group-hover:bg-user-plus w-6 h-6 text-white mx-1 "/> {user.username} <Candy/>{user.candyPoints}</li>
+            <li ><Link to="/profile" className="flex items-center group"><div className="bg-user group-hover:bg-user-plus w-6 h-6 text-white mx-1 "/> {user.username} <Candy/>{user.candyPoints}</Link></li>
             <li onClick={logout}>
               <Link to="/posts" className="hover:underline">Logout</Link>
             </li>

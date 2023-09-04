@@ -8,6 +8,7 @@ import Edit from "./pages/posts/Edit";
 import Index from "./pages/posts/Index";
 import New from "./pages/posts/New";
 import Show from "./pages/posts/Show";
+import Profile from "./pages/users/Profile";
 
 export default function App() {
   // holds the user data after we fetch it with the token
@@ -77,6 +78,7 @@ export default function App() {
               path="/posts/:id/edit"
               element={<Edit username={loggedInUser} setUser={setUser}/>}
             />
+            <Route path="/profile" element={<Profile user={user} setUser={setUser}/>}/>
             {/* once the useEffect has completed, with a user token, redirect all unspecified routes to the main page */}
             {loaded && <Route path="*" element={<Navigate to="/posts" />} />}
           </>

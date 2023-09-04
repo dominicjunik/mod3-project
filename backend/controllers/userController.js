@@ -19,6 +19,7 @@ module.exports.index = async (req, res) => {
 // update PUT => this route updates the user information
 module.exports.update = async (req, res) => {
     console.log('PUT => /api/users/:id')
+    // encrypt password again if they update it
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
         console.log('Found user', updatedUser)

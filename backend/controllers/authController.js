@@ -76,6 +76,8 @@ module.exports.login = async (req, res) => {
 // delete DELETE => destroy user
 // make them go to a seperate page and input their password to delete the account
 module.exports.delete = async (req, res) => {
+    console.log('DELETE FUNCTION')
+    console.log(req)
     try {
         // step 1: get user from params or from the req.body (because they will already be logged in)
         const foundUser = await User.findById(req.params.id)
@@ -100,4 +102,17 @@ module.exports.delete = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+module.exports.update = async (req, res) => {
+    try {
+        // step 1 get the user information from the req.id
+
+        // step 2 encrypt new password
+        // step 3 update user information 
+
+    } catch(error) {
+        console.log(error.message);
+        res.status(400).json({ error: error.message });
+    }
+}    
 

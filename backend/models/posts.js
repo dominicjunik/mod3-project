@@ -3,7 +3,7 @@ const posts = [
         createdBy: "dom",
         teaser: "A big house with lots of candy on the porch",
         correctGuess: "Jackpot, so much candy",
-        wrongGuess: "Better safe than sorry",
+        wrongGuess: "Better safe than sorry, you walk away, the next time you check your candy bag its mysteriously lighter..",
         trick: false,
         candyPoints: 50  
     },
