@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Candy from "../../components/Candy";
 
 export default function New({ user, setUser }) {
   // state variable to save the form data
@@ -60,27 +61,27 @@ export default function New({ user, setUser }) {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <h1>Create a Trick or Treat</h1>
+      <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Create a Trick or Treat</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col w-screen items-center"
       >
-        <label htmlFor="teaser">Set the scene:</label>
+        <label htmlFor="teaser" className="text-xl bg-black/90 rounded-lg px-2 ">Set the scene:</label>
         <textarea
           name="teaser"
           id="teaser"
           cols="50"
           rows="4"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           onChange={handleChange}
           placeholder="You see an old crooked house with an overgrown lawn, a single light illuminates a pumpkin filled with candy on the doorstep..."
         />
 
-        <fieldset>
-          <legend>Is this a Trick or a Treat?</legend>
-          <div className="flex justify-center">
-            <label htmlFor="trick">Trick</label>
+        <fieldset className="m-2">
+          <legend className="text-xl bg-black/90 rounded-lg px-2 ">Is this a Trick or a Treat?</legend>
+          <div className="flex justify-center bg-black/80 rounded-lg text-lg">
+            <label htmlFor="trick" >Trick</label>
             <input
               type="radio"
               id="trick"
@@ -100,38 +101,39 @@ export default function New({ user, setUser }) {
             />
           </div>
         </fieldset>
-        <label htmlFor="candyPoints">How much candy is at stake?</label>
+        <label htmlFor="candyPoints" className="text-xl bg-black/90 rounded-lg px-2 flex">How much candy is at stake?<Candy/></label>
         <input
           type="number"
           name="candyPoints"
           id="candyPoints"
           placeholder="10"
           required
+          className="p-1 rounded-lg bg-black/80"
           onChange={handleChange}
         />
-        <label htmlFor="correctGuess">If they guess correct?</label>
+        <label htmlFor="correctGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they guess correct?</label>
         <textarea
           name="correctGuess"
           id="correctGuess"
           cols="50"
           rows="2"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           onChange={handleChange}
           placeholder="The motherload! fullsized candy bars with a note saying, take as many as you want :)"
         />
-        <label htmlFor="wrongGuess">If they get it wrong...</label>
+        <label htmlFor="wrongGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they get it wrong...</label>
         <textarea
           name="wrongGuess"
           id="wrongGuess"
           cols="50"
           rows="2"
-          className="p-1"
+          className="p-1 rounded-lg bg-black/80"
           required
           onChange={handleChange}
           placeholder="Better safe than sorry. Live to treat another day."
         />
-        <button className="text-2xl">Create</button>
+        <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Create</button>
       </form>
     </div>
   );
