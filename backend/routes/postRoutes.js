@@ -1,25 +1,25 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 // import postController here
-const postController = require('../controllers/postController')
+const postController = require("../controllers/postController");
 // import middleware to authorize routes that should only work if you are logged in
-const { authorize } = require('../middleware/authMiddleware')
+const { authorize } = require("../middleware/authMiddleware");
 
 //post routes here
 // seed
-router.post('/seed', postController.seed)
+router.post("/seed", postController.seed);
 // index
-router.get('/', postController.index)
+router.get("/", postController.index);
 // delete
-router.delete('/:id', authorize, postController.delete)
+router.delete("/:id", authorize, postController.delete);
 // bet
-router.put('/:id/bet', authorize, postController.bet)
+router.put("/:id/bet", authorize, postController.bet);
 // update
-router.put('/:id', authorize, postController.update)
+router.put("/:id", authorize, postController.update);
 // create
-router.post('/', authorize, postController.create)
+router.post("/", authorize, postController.create);
 // show
-router.get('/:id', postController.show)
+router.get("/:id", postController.show);
 
-module.exports = router
+module.exports = router;

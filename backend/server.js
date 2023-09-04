@@ -1,43 +1,43 @@
 // enabling .env file to hide the server information
-require('dotenv').config()
+require("dotenv").config();
 
 // importing express to run our server saving it in App to use
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 //importing cors so our server can talk to the react app
-const cors = require('cors')
+const cors = require("cors");
 
 // setting a fixed port
-const PORT = 8080 
+const PORT = 8080;
 
 // connect to the database through the function in the config.js
-const connectDB = require('./config')
-connectDB()
+const connectDB = require("./config");
+connectDB();
 
 // When the routes are set up we can import them here
-const userRoutes = require('./routes/userRoutes')
-const authRoutes = require('./routes/authRoutes')
-const postRoutes = require('./routes/postRoutes')
+const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
+const postRoutes = require("./routes/postRoutes");
 
-const { authorize } = require('./middleware/authMiddleware')
+const { authorize } = require("./middleware/authMiddleware");
 
 // middleware for the json
-app.use(express.json())
+app.use(express.json());
 // so react can talk with our server
-app.use(cors())
+app.use(cors());
 
 // ultra simple route to test functionality
-app.get('/', (req, res) => {res.send('Server says Hi!')})
+app.get("/", (req, res) => {
+  res.send("Server says Hi!");
+});
 
 // after the routes are imported we can set up their directions here
-app.use('/api/users', authorize, userRoutes)
-app.use('/auth', authRoutes)
-app.use('/api/posts', postRoutes)
+app.use("/api/users", authorize, userRoutes);
+app.use("/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
-
-
-// tells our server where to listen to 
+// tells our server where to listen to
 app.listen(PORT, () => {
-    console.log('Listening on port: ', PORT)
-})
+  console.log("Listening on port: ", PORT);
+});

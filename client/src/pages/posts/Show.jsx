@@ -130,17 +130,22 @@ export default function Show({ user, setUser }) {
       <div className="bg-black/90 rounded-2xl mt-8 sm:mt-40 p-4 flex flex-col items-center">
         {tot.username ? (
           <>
-          <div className={`flex flex-col items-center ${tot.correct ? "text-green-600" : "text-red-700"}`}>
-            <p className="flex items-center text-lg">
-              {tot.correct ? "+" : "-"}
-              {post.candyPoints}
-              <Candy />
-            </p>
-            <p>{post.teaser}</p>
-            <p>
-              {/* display the corresponding message based on if they guessed correctly */}
-              {tot.correct ? post.correctGuess : post.wrongGuess}
-            </p></div>
+            <div
+              className={`flex flex-col items-center ${
+                tot.correct ? "text-green-600" : "text-red-700"
+              }`}
+            >
+              <p className="flex items-center text-lg">
+                {tot.correct ? "+" : "-"}
+                {post.candyPoints}
+                <Candy />
+              </p>
+              <p>{post.teaser}</p>
+              <p>
+                {/* display the corresponding message based on if they guessed correctly */}
+                {tot.correct ? post.correctGuess : post.wrongGuess}
+              </p>
+            </div>
           </>
         ) : (
           <>

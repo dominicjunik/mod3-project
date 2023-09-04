@@ -22,13 +22,13 @@ export default function New({ user, setUser }) {
       let userObj = {
         username: user.username,
         trick: form.trick,
-        correct: true
+        correct: true,
       };
       // create the post structure from the form and add the username
       let newPost = { ...form, createdBy: user.username };
       // push user into solvedBy array so they cannot solve their own post
-      newPost.solvedBy = []
-      newPost.solvedBy.push(userObj)
+      newPost.solvedBy = [];
+      newPost.solvedBy.push(userObj);
       // create a variable to see if the user is wagering more than they have
       const balance = user.candyPoints - newPost.candyPoints;
       // if they are kick them out of the request with an alert message
@@ -44,12 +44,12 @@ export default function New({ user, setUser }) {
       // update the users local state so the displays show properly
       setUser({ ...user, candyPoints: balance });
       navigate("/posts");
-        console.log(newPost);
+      console.log(newPost);
     } catch (error) {
       console.log(error.message);
-      alert('Session expired: You must login before creating a post')
-      logout()
-      navigate("/login")
+      alert("Session expired: You must login before creating a post");
+      logout();
+      navigate("/login");
     }
   }
 
@@ -61,12 +61,19 @@ export default function New({ user, setUser }) {
 
   return (
     <div className="flex flex-col items-center min-h-full">
-      <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Create a Trick or Treat</h1>
+      <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">
+        Create a Trick or Treat
+      </h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col w-screen items-center"
       >
-        <label htmlFor="teaser" className="text-xl bg-black/90 rounded-lg px-2 ">Set the scene:</label>
+        <label
+          htmlFor="teaser"
+          className="text-xl bg-black/90 rounded-lg px-2 "
+        >
+          Set the scene:
+        </label>
         <textarea
           name="teaser"
           id="teaser"
@@ -79,9 +86,11 @@ export default function New({ user, setUser }) {
         />
 
         <fieldset className="m-2">
-          <legend className="text-xl bg-black/90 rounded-lg px-2 ">Is this a Trick or a Treat?</legend>
+          <legend className="text-xl bg-black/90 rounded-lg px-2 ">
+            Is this a Trick or a Treat?
+          </legend>
           <div className="flex justify-center bg-black/80 rounded-lg text-lg">
-            <label htmlFor="trick" >Trick</label>
+            <label htmlFor="trick">Trick</label>
             <input
               type="radio"
               id="trick"
@@ -101,7 +110,13 @@ export default function New({ user, setUser }) {
             />
           </div>
         </fieldset>
-        <label htmlFor="candyPoints" className="text-xl bg-black/90 rounded-lg px-2 flex">How much candy is at stake?<Candy/></label>
+        <label
+          htmlFor="candyPoints"
+          className="text-xl bg-black/90 rounded-lg px-2 flex"
+        >
+          How much candy is at stake?
+          <Candy />
+        </label>
         <input
           type="number"
           name="candyPoints"
@@ -111,7 +126,12 @@ export default function New({ user, setUser }) {
           className="p-1 rounded-lg bg-black/80"
           onChange={handleChange}
         />
-        <label htmlFor="correctGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they guess correct?</label>
+        <label
+          htmlFor="correctGuess"
+          className="text-xl bg-black/90 rounded-lg px-2 mt-2"
+        >
+          If they guess correct?
+        </label>
         <textarea
           name="correctGuess"
           id="correctGuess"
@@ -122,7 +142,12 @@ export default function New({ user, setUser }) {
           onChange={handleChange}
           placeholder="The motherload! fullsized candy bars with a note saying, take as many as you want :)"
         />
-        <label htmlFor="wrongGuess" className="text-xl bg-black/90 rounded-lg px-2 mt-2">If they get it wrong...</label>
+        <label
+          htmlFor="wrongGuess"
+          className="text-xl bg-black/90 rounded-lg px-2 mt-2"
+        >
+          If they get it wrong...
+        </label>
         <textarea
           name="wrongGuess"
           id="wrongGuess"
@@ -133,7 +158,9 @@ export default function New({ user, setUser }) {
           onChange={handleChange}
           placeholder="Too easy, must be a trap. You notice a few blocks later your candy bag is strangely lighter..."
         />
-        <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Create</button>
+        <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+          Create
+        </button>
       </form>
     </div>
   );
