@@ -7,14 +7,15 @@ export default function Profile({user, setUser}) {
     const confirmDelete = useRef()
     // get more candy function
     // edit profile
-    user.password = ""
-    console.log(user)
+   
+    // console.log(user)
+    
 
     // to redirect after form submission
     const navigate = useNavigate()
     // state variable to control the form values
-    let [form, setForm] = useState(user)
-
+    let [form, setForm] = useState({...user, password: ""})
+console.log(form)
     // function to update state when a form is changed
     function handleChange(event) {
         // spread the form and then edit the relevent keys using bracket object notation
@@ -26,17 +27,33 @@ export default function Profile({user, setUser}) {
         event.preventDefault()
 
         try {
-            // step 1: make a put request to the server            
+            // step 1: make a put request to the server with our token       
+    
+            const userResponse = await axios.put(`/auth/${user._id}`, form, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            const token = userResponse.data.token
+
+            // if theres no token, reset form and stop the function
+            if (!token) {
+                setForm(emptyForm)
+                return
+            }
+            // save the token in local storage
+            localStorage.setItem("token", token)
+            
             //step 2: using the token in local storage we make a request to get the user information
-            const userResponse = await axios.get('/api/users', {
+            const updatedResponse = await axios.get('/api/users', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             // save the user data in the state
-            setUser(userResponse.data)
-            // redirect to the main page
-            navigate('/posts')
+            setUser(updatedResponse.data)
+            alert('Profile information updated!')
+            
         } catch(error) {
             console.log(error.message)
             alert('something bad')
@@ -72,7 +89,7 @@ export default function Profile({user, setUser}) {
 return (
     <div className="flex flex-col items-center min-h-full">
             <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Profile</h1>
-            <details>
+            <details className="m-4">
                 <summary className=" text-4xl bg-black/90 px-2 pb-1 rounded-lg text-center">EDIT</summary>
                 <form onSubmit={handleSubmit} className="flex flex-col items-center bg-black/70 p-4 rounded-xl w-auto">
              

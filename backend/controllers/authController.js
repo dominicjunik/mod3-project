@@ -103,15 +103,23 @@ module.exports.delete = async (req, res) => {
     }
 }
 
+// Update user -> specifically from the profile page so full user information is provided in the body
 module.exports.update = async (req, res) => {
     try {
         console.log(req.body)
-        res.status(200).json('Updated User')
-        // step 1 get the user information from the req.id
-
-        // step 2 encrypt new password
-        // step 3 update user information 
-
+        // step 1 encrypt new password
+        const encryptedPassword = await bcrypt.hash(
+            req.body.password,
+            Number(process.env.SALT_ROUNDS)
+        );
+        // step 2 update the user in the database 
+        const updatedUser = await User.findByIdAndUpdate(req.body._id, {
+            ...req.body,
+            password: encryptedPassword,
+        }, { new: true });
+        // step 3: generate a jwt token with our function above and send it off to the user
+        const token = generateToken(updatedUser);
+        res.status(200).json({ token })
     } catch(error) {
         console.log(error.message);
         res.status(400).json({ error: error.message });
