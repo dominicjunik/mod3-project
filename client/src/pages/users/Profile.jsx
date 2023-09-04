@@ -70,7 +70,7 @@ export default function Profile({user, setUser}) {
     }
 
 return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-full">
             <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Profile</h1>
             <details>
                 <summary className=" text-4xl bg-black/90 px-2 pb-1 rounded-lg text-center">EDIT</summary>

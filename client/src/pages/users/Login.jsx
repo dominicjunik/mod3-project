@@ -57,7 +57,7 @@ export default function Login({ setUser }) {
     }
 
     return (
-        <div className="flex flex-col items-center min-h-screen">
+        <div className="flex flex-col items-center min-h-full">
             <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Log In</h1>
             <form onSubmit={handleSubmit} className="flex flex-col w-screen items-center">
                 <label htmlFor="username" className="text-xl bg-black/90 rounded-lg px-2 mb-1">Username:</label>

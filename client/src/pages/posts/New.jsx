@@ -60,7 +60,7 @@ export default function New({ user, setUser }) {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-full">
       <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">Create a Trick or Treat</h1>
       <form
         onSubmit={handleSubmit}
@@ -131,7 +131,7 @@ export default function New({ user, setUser }) {
           className="p-1 rounded-lg bg-black/80"
           required
           onChange={handleChange}
-          placeholder="Better safe than sorry. Live to treat another day."
+          placeholder="Too easy, must be a trap. You notice a few blocks later your candy bag is strangely lighter..."
         />
         <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Create</button>
       </form>

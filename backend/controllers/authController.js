@@ -105,6 +105,8 @@ module.exports.delete = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     try {
+        console.log(req.body)
+        res.status(200).json('Updated User')
         // step 1 get the user information from the req.id
 
         // step 2 encrypt new password

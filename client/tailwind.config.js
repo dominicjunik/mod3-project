@@ -16,7 +16,8 @@ export default {
         secondary: 'rgb(255, 214, 112)',
         tertiary: 'rgb(51, 153, 137)',
         text: '#170D2E',
-        greengood: '#3d9900'
+        greengood: '#3d9900',
+        bgOrange: '#FF3600'
       }, 
       boxShadow: {    
       },

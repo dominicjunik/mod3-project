@@ -41,7 +41,7 @@ export default function Index({ user }) {
   
   console.log(user);
   return (
-    <div className="flex flex-col justify-center">  
+    <div className="flex flex-col justify-center ">  
     
       <h1 className="text-center m-4 mb-10 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
         TRICK OR TWEET
