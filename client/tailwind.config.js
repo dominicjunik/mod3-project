@@ -22,12 +22,9 @@ export default {
       boxShadow: {    
       },
       backgroundImage: {
-        'halloween': "url('./src/assets/halloween-castle.png')",
-        'moon': "url('./src/assets/cloudmoon.gif')",
-        'occult': "url('./src/assets/occult.png')",
-        'ghost': "url(/ghost.png)",
-        'user': "url(./src/assets/user.svg)",
-        'user-plus': "url(./src/assets/user-plus.svg)"
+        'ghost': "url(/src/assets/ghost.png)",
+        'user': "url(/src/assets/user.svg)",
+        'user-plus': "url(/src/assets/user-plus.svg)"
         },
     },
     textShadow: {
