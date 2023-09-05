@@ -32,7 +32,7 @@ export default function Index({ user }) {
     } catch (error) {
       console.log(error.message);
     }
-    setLoaded(true)
+    if(Array.isArray(posts)){setLoaded(true)}
   }
   // on page load make the database call
   useEffect(() => {
