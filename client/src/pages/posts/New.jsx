@@ -79,7 +79,7 @@ export default function New({ user, setUser }) {
           id="teaser"
           cols="50"
           rows="4"
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           required
           onChange={handleChange}
           placeholder="You see an old crooked house with an overgrown lawn, a single light illuminates a pumpkin filled with candy on the doorstep..."
@@ -137,7 +137,7 @@ export default function New({ user, setUser }) {
           id="correctGuess"
           cols="50"
           rows="2"
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           required
           onChange={handleChange}
           placeholder="The motherload! fullsized candy bars with a note saying, take as many as you want :)"
@@ -153,7 +153,7 @@ export default function New({ user, setUser }) {
           id="wrongGuess"
           cols="50"
           rows="2"
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           required
           onChange={handleChange}
           placeholder="Too easy, must be a trap. You notice a few blocks later your candy bag is strangely lighter..."
