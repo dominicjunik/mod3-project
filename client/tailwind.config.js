@@ -25,7 +25,7 @@ export default {
         'halloween': "url('./src/assets/halloween-castle.png')",
         'moon': "url('./src/assets/cloudmoon.gif')",
         'occult': "url('./src/assets/occult.png')",
-        'ghost': "url(./src/assets/ghost.png)",
+        'ghost': "url(/ghost.png)",
         'user': "url(./src/assets/user.svg)",
         'user-plus': "url(./src/assets/user-plus.svg)"
         },
