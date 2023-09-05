@@ -95,3 +95,15 @@ Backend:
     - Bio information and profile pictures
 #### Backend:
 - More robust token authentication. Currently the routes only check if the token is valid, they do not verify that sender of the token is the same as the user whos data is being changed.
+
+## Credits
+- [Canva](https://www.canva.com/templates/EAEIA3OwQHU-black-and-orange-ghost-vintage-horror-illustrative-halloween-virtual-background/) For an awesome free background image
+- [coolors.co](https://coolors.co/generate) for color themes.
+- Design tools (listed above but here they are again):
+
+    - [Figma](https://www.figma.com/)
+    - [Trello](https://trello.com/)
+    - [SmartDraw](https://cloud.smartdraw.com/)
+- [Postman](https://www.postman.com/) for testing backend routes <3
+- [Feather Icons](https://feathericons.com/) for great svg icons.
+- [Spooky music](https://www.youtube.com/watch?v=hD3zDZ4-6Wg&ab_channel=IfeelImmortal) I didn't end up using it but heres some cool nocopyright music to get you in the spirit. 
