@@ -26,20 +26,24 @@ export default function Index({ user }) {
     try {
       // request all the posts from the database
       const response = await axios.get("/api/posts");
+      console.log('this is the response.data from the server:')
       console.log(response.data);
       // save them in state
       setPosts(response.data);
     } catch (error) {
+      console.log('error in getPosts()')
       console.log(error.message);
     }
+    
     if(Array.isArray(posts)){setLoaded(true)}
   }
   // on page load make the database call
   useEffect(() => {
     getPosts();
   }, []);
-
-  console.log(user);
+console.log('this is the posts variable:')
+  console.log(posts)
+  // console.log(user);
   return (
     
     <div className="flex flex-col justify-center ">
@@ -62,7 +66,7 @@ export default function Index({ user }) {
             (peep) => peep.username === user.username
           );
 
-          console.log(solved);
+          // console.log(solved);
           return (
             <Link
               key={i}
