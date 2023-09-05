@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../../api'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Candy from "../../components/Candy";
