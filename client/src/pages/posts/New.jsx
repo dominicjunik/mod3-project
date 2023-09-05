@@ -123,7 +123,7 @@ export default function New({ user, setUser }) {
           id="candyPoints"
           placeholder="10"
           required
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           onChange={handleChange}
         />
         <label

@@ -94,7 +94,7 @@ export default function Edit({ username, setUser }) {
             id="teaser"
             cols="50"
             rows="4"
-            className="p-1 rounded-lg bg-black/80"
+            className="p-1 rounded-lg max-w-full bg-black/80"
             required
             onChange={handleChange}
             defaultValue={form.teaser}
@@ -138,7 +138,7 @@ export default function Edit({ username, setUser }) {
             name="candyPoints"
             id="candyPoints"
             required
-            className="p-1 rounded-lg bg-black/80"
+            className="p-1 rounded-lg max-w-full bg-black/80"
             defaultValue={form.candyPoints}
             onChange={handleChange}
           />
@@ -153,7 +153,7 @@ export default function Edit({ username, setUser }) {
             id="correctGuess"
             cols="50"
             rows="2"
-            className="p-1 rounded-lg bg-black/80"
+            className="p-1 rounded-lg max-w-full bg-black/80"
             required
             defaultValue={form.correctGuess}
             onChange={handleChange}
@@ -169,7 +169,7 @@ export default function Edit({ username, setUser }) {
             id="wrongGuess"
             cols="50"
             rows="2"
-            className="p-1 rounded-lg bg-black/80"
+            className="p-1 rounded-lg max-w-full bg-black/80"
             required
             defaultValue={form.wrongGuess}
             onChange={handleChange}

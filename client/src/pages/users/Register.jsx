@@ -75,7 +75,7 @@ export default function Register({ setUser }) {
           id="username"
           name="username"
           onChange={handleChange}
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           value={form.username}
         />
 
@@ -91,7 +91,7 @@ export default function Register({ setUser }) {
           id="email"
           name="email"
           onChange={handleChange}
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           value={form.email}
         />
 
@@ -107,7 +107,7 @@ export default function Register({ setUser }) {
           id="password"
           name="password"
           onChange={handleChange}
-          className="p-1 rounded-lg bg-black/80"
+          className="p-1 rounded-lg max-w-full bg-black/80"
           value={form.password}
         />
 
