@@ -5,6 +5,7 @@ import Candy from "../../components/Candy";
 import { User, UserCheck } from "react-feather";
 
 export default function Index({ user }) {
+  const [loaded, setLoaded] = useState(false)
   // this will store the posts from the DB to map onto the page
   const [posts, setPosts] = useState([]);
   // navigate for button routing
@@ -31,6 +32,7 @@ export default function Index({ user }) {
     } catch (error) {
       console.log(error.message);
     }
+    setLoaded(true)
   }
   // on page load make the database call
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function Index({ user }) {
 
   console.log(user);
   return (
+    
     <div className="flex flex-col justify-center ">
       <h1 className="text-center m-4 mb-4 sm:mb-16 font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-br from-black to-yellow-800 font-outline-2">
         TRICK OR TWEET
@@ -53,7 +56,7 @@ export default function Index({ user }) {
         </button>
       ) : null}
       <div className="">
-        {posts.map((post, i) => {
+        {loaded && posts.map((post, i) => {
           // if the logged in user has solved this post save the data into this variable
           let solved = post.solvedBy.find(
             (peep) => peep.username === user.username
