@@ -58,9 +58,9 @@ console.log('this is the posts variable:')
         >
           CREATE NEW POST
         </button>
-      ) : null}
+      ) : <div className='mx-7 p-3 rounded-2xl border-transparent max-w-full md:max-w-lg border-2 flex justify-center items-center  bg-black/90 '>Welcome to a virtual Halloween experience. Every post is either a trick or a treat, guess correctly to win candy. Register/Login to start playing.</div>}
       <div className="">
-        {loaded && posts.map((post, i) => {
+        {loaded ? posts.map((post, i) => {
           // if the logged in user has solved this post save the data into this variable
           let solved = post.solvedBy.find(
             (peep) => peep.username === user.username
@@ -124,7 +124,7 @@ console.log('this is the posts variable:')
               </div>
             </Link>
           );
-        })}
+        }): <div className='mx-7 p-3 rounded-2xl border-transparent border-2 flex justify-center items-center  bg-black/90 '>The Database needs a few moments to wakeup</div>}
       </div>
     </div>
   );
