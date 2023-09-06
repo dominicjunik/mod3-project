@@ -56,7 +56,7 @@ export default function Show({ user, setUser }) {
   async function makeGuess(totBool) {
     // first check if they can make the wager
     if (user.candyPoints - post.candyPoints < 0) {
-      return alert("Not enough candy to gamble");
+      return alert("not enough candy, visit profile page to get more!");
     }
     // evaluate if the guess is correct or not
     let correct = totBool === post.trick;
