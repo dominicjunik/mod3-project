@@ -38,6 +38,8 @@ export default function New({ user, setUser }) {
       const balance = user.candyPoints - newPost.candyPoints;
       // if they are kick them out of the request with an alert message
       if (balance < 0) {
+        //spinner off
+        setLoading(false)
         return alert("not enough candy, visit profile page to get more!");
       }
       // send create request to the server with our token
@@ -56,6 +58,7 @@ export default function New({ user, setUser }) {
       logout();
       navigate("/login");
     }
+    //spinner off
     setLoading(false);
   }
 

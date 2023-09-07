@@ -2,6 +2,7 @@ import axios from "../../api";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "react-feather";
+import Candy from "../../components/Candy";
 
 export default function Edit({ username, setUser }) {
   // state variable to control the loading after button press
@@ -88,6 +89,11 @@ export default function Edit({ username, setUser }) {
         <h1 className="mt-8 mb-4 sm:mt-36 text-4xl bg-black/90 px-2 pb-1 rounded-lg ">
           Edit Post
         </h1>
+        <div
+            className="text-2xl items-center bg-black/90 rounded-lg px-3 py-1 mb-2 flex"
+          >
+            {form.candyPoints}<Candy/>
+          </div>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col w-screen items-center"
@@ -136,21 +142,8 @@ export default function Edit({ username, setUser }) {
               />
             </div>
           </fieldset>
-          <label
-            htmlFor="candyPoints"
-            className="text-xl bg-black/90 rounded-lg px-2 flex"
-          >
-            How much candy is at stake?
-          </label>
-          <input
-            type="number"
-            name="candyPoints"
-            id="candyPoints"
-            required
-            className="p-1 rounded-lg max-w-full bg-black/80"
-            defaultValue={form.candyPoints}
-            onChange={handleChange}
-          />
+          
+          
           <label
             htmlFor="correctGuess"
             className="text-xl bg-black/90 rounded-lg px-2 mt-2"
