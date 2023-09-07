@@ -151,6 +151,7 @@ export default function Profile({ user, setUser }) {
             type="password"
             id="password"
             name="password"
+            required
             onChange={handleChange}
             className="p-1 rounded-lg max-w-full bg-black/80"
             value={form.password}
@@ -188,6 +189,7 @@ export default function Profile({ user, setUser }) {
             id="password1"
             name="password"
             className="p-1 rounded-lg bg-black/80"
+            required
             ref={confirmDelete}
           />
 
