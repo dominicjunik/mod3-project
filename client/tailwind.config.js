@@ -26,12 +26,16 @@ export default {
         'user': "url(/src/assets/user.svg)",
         'user-plus': "url(/src/assets/user-plus.svg)"
         },
+        animation: {
+          'spin-slow': 'spin 2s linear infinite',
+        },
     },
     textShadow: {
       sm: '0 1px 2px var(--tw-shadow-color)',
       DEFAULT: '0 2px 4px var(--tw-shadow-color)',
       lg: '0 8px 16px var(--tw-shadow-color)',
     },
+    
   },
   plugins: [
     plugin(function ({ matchUtilities, theme }) {

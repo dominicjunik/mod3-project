@@ -178,7 +178,7 @@ export default function Edit({ username, setUser }) {
           />
           {loading ? (
             <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
-              <Loader />
+              <Loader className="animate-spin-slow" />
             </div>
           ) : (
             <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
@@ -194,7 +194,7 @@ export default function Edit({ username, setUser }) {
     showEdit()
   ) : (
     <>
-      <Loader />
+      <Loader className="animate-spin-slow" />
     </>
   );
 }

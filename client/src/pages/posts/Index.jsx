@@ -2,7 +2,7 @@ import axios from '../../api'
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Candy from "../../components/Candy";
-import { User, UserCheck } from "react-feather";
+import { UserCheck } from "react-feather";
 
 export default function Index({ user }) {
   const [loaded, setLoaded] = useState(false)
@@ -124,7 +124,7 @@ console.log('this is the posts variable:')
               </div>
             </Link>
           );
-        }): <div className='mx-7 p-3 rounded-2xl border-transparent border-2 flex justify-center items-center  bg-black/90 '>The Database needs a few moments to wakeup</div>}
+        }): <div className='mx-7 p-3 rounded-2xl border-transparent border-2 flex justify-center items-center bg-black/90 '> <span className='animate-pulse'>The Database needs a few moments to wakeup</span></div>}
       </div>
     </div>
   );
