@@ -1,7 +1,7 @@
-import axios from '../../api'
+import axios from "../../api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader } from 'react-feather';
+import { Loader } from "react-feather";
 
 // declaring an object with all the form values empty for the default state
 let emptyForm = {
@@ -11,8 +11,8 @@ let emptyForm = {
 };
 
 export default function Login({ setUser }) {
-    // state variable to control the loading after button press
-    const [loading, setLoading] = useState(false)
+  // state variable to control the loading after button press
+  const [loading, setLoading] = useState(false);
   // to redirect after form submission
   const navigate = useNavigate();
   // state variable to control the form values
@@ -28,7 +28,7 @@ export default function Login({ setUser }) {
     // ALWAYS PREVENT THE RELOAD
     event.preventDefault();
     //turn on the spinner
-    setLoading(true)
+    setLoading(true);
 
     try {
       // step 1: we make a request to login with our name/pw
@@ -52,14 +52,14 @@ export default function Login({ setUser }) {
       });
       // save the user data in the state
       setUser(userResponse.data);
-      
+
       // redirect to the main page
       navigate("/posts");
     } catch (error) {
       console.log(error.message);
     }
     // turn off spinner
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -103,9 +103,15 @@ export default function Login({ setUser }) {
           value={form.password}
         />
 
-        
-          {loading?<div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent "><Loader /></div> : <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">Submit</button>}
-        
+        {loading ? (
+          <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
+            <Loader />
+          </div>
+        ) : (
+          <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+            Submit
+          </button>
+        )}
       </form>
     </div>
   );

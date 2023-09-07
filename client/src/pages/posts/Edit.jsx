@@ -1,8 +1,12 @@
-import axios from '../../api'
+import axios from "../../api";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Loader } from "react-feather";
 
 export default function Edit({ username, setUser }) {
+  // state variable to control the loading after button press
+  const [loading, setLoading] = useState(false);
+  // to conditionally render the page if the data takes a second
   const [loaded, setLoaded] = useState(false);
   // state variable to save the post data inside then update with the the form data
   const [form, setForm] = useState({});
@@ -48,11 +52,14 @@ export default function Edit({ username, setUser }) {
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
   //handle the update
   // function to send the updated post to the server
   async function handleSubmit(e) {
     // page reload bad
     e.preventDefault();
+    // turn on spinner
+    setLoading(true);
     try {
       // spread the original post data into the new object, then spread the updated form inputs
       let updatedPost = { ...form };
@@ -70,6 +77,8 @@ export default function Edit({ username, setUser }) {
       alert("Session expired: You must login before editting this post");
       logout();
     }
+    //turn off spinner
+    setLoading(false);
   }
 
   // displays the edit page
@@ -174,13 +183,25 @@ export default function Edit({ username, setUser }) {
             defaultValue={form.wrongGuess}
             onChange={handleChange}
           />
-          <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
-            Update
-          </button>
+          {loading ? (
+            <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
+              <Loader />
+            </div>
+          ) : (
+            <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+              Update
+            </button>
+          )}
         </form>
       </div>
     );
   }
 
-  return loaded ? showEdit() : <>Loading...</>;
+  return loaded ? (
+    showEdit()
+  ) : (
+    <>
+      <Loader />
+    </>
+  );
 }

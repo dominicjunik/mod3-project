@@ -1,9 +1,12 @@
-import axios from '../../api'
+import axios from "../../api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Candy from "../../components/Candy";
+import { Loader } from "react-feather";
 
 export default function New({ user, setUser }) {
+  // state variable to control the loading after button press
+  const [loading, setLoading] = useState(false);
   // state variable to save the form data
   const [form, setForm] = useState({});
   // to redirect after submission
@@ -17,6 +20,8 @@ export default function New({ user, setUser }) {
   async function handleSubmit(e) {
     // page reload bad
     e.preventDefault();
+    // enable spinner
+    setLoading(true);
     try {
       // create an object of user data for the solvedBy array
       let userObj = {
@@ -51,6 +56,7 @@ export default function New({ user, setUser }) {
       logout();
       navigate("/login");
     }
+    setLoading(false);
   }
 
   // simple logout function, clears the state variable and deletes the token => this causes all the routes to change
@@ -158,9 +164,15 @@ export default function New({ user, setUser }) {
           onChange={handleChange}
           placeholder="Too easy, must be a trap. You notice a few blocks later your candy bag is strangely lighter..."
         />
-        <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
-          Create
-        </button>
+        {loading ? (
+          <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
+            <Loader />
+          </div>
+        ) : (
+          <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+            Create
+          </button>
+        )}
       </form>
     </div>
   );

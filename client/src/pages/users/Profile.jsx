@@ -1,14 +1,14 @@
-import axios from '../../api'
+import axios from "../../api";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Candy from "../../components/Candy";
+import { Loader } from "react-feather";
 
 export default function Profile({ user, setUser }) {
+  // state variable to control the loading after button press
+  const [loading, setLoading] = useState(false);
+  // saving pw data
   const confirmDelete = useRef();
-  // get more candy function
-  // edit profile
-
-  // console.log(user)
 
   // to redirect after form submission
   const navigate = useNavigate();
@@ -24,7 +24,8 @@ export default function Profile({ user, setUser }) {
   async function handleSubmit(event) {
     // ALWAYS PREVENT THE RELOAD
     event.preventDefault();
-
+    // turn on spinner
+    setLoading(true);
     try {
       // step 1: make a put request to the server with our token
 
@@ -56,11 +57,15 @@ export default function Profile({ user, setUser }) {
       console.log(error.message);
       alert("something bad");
     }
+    //turn off spinner
+    setLoading(false);
   }
 
   async function handleDelete(event) {
     // ALWAYS PREVENT THE RELOAD
     event.preventDefault();
+    // turn on spinner
+    setLoading(true);
     // structure the data into an object
     let payload = { password: confirmDelete.current.value };
     // console.log(`/auth/${user._id}`, payload)
@@ -76,11 +81,11 @@ export default function Profile({ user, setUser }) {
       console.log(error.message);
       alert(error.message);
     }
+    // turn off spinner
+    setLoading(false);
   }
 
-  async function handleCandy(event) {
-    // ALWAYS PREVENT THE RELOAD
-    // event.preventDefault()
+  async function handleCandy() {
     try {
       const updatedUser = await axios.put(
         `/api/users/${user._id}`,
@@ -151,9 +156,15 @@ export default function Profile({ user, setUser }) {
             value={form.password}
           />
 
-          <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
-            Submit
-          </button>
+          {loading ? (
+            <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
+              <Loader />
+            </div>
+          ) : (
+            <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+              Submit
+            </button>
+          )}
         </form>
       </details>
       <details>
@@ -180,9 +191,15 @@ export default function Profile({ user, setUser }) {
             ref={confirmDelete}
           />
 
-          <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
-            Submit
-          </button>
+          {loading ? (
+            <div className="m-2 text-2xl bg-black/90 hover:bg-black/80 p-1 px-8 rounded-lg border border-transparent ">
+              <Loader />
+            </div>
+          ) : (
+            <button className="m-2 text-2xl bg-black/90 hover:bg-black/80 px-2 rounded-lg border border-transparent hover:border-white">
+              Submit
+            </button>
+          )}
         </form>
       </details>
 
